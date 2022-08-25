@@ -5,18 +5,27 @@ import code from '../../images/footer_icons/qr.svg'
 import gift from '../../images/footer_icons/gift.svg'
 import logoutImg from '../../images/footer_icons/logout.png'
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../store";
-import {logout} from "../../store/infoUserSlice";
+import {RootState, useAppDispatch} from "../../store";
+import {logout, setShowProfileSettings} from "../../store/infoUserSlice";
+import {useSelector} from "react-redux";
+import React from "react";
+
 
 const Footer = () => {
     const navigate=useNavigate()
     const dispatch=useAppDispatch()
+    const showProfileSetting=useSelector<RootState,boolean>(state => state.infoUser.showProfileSettings)
 
-  return(
+    const click=(event:React.MouseEvent<HTMLDivElement>)=>{
+        event.stopPropagation()
+        dispatch(setShowProfileSettings(!showProfileSetting))
+    }
+
+    return(
       <div className={style.footer}>
          <div className={`${container.container} ${style.flex}`}>
              <div className={style.wrapper}>
-                 <div className={style.item} onClick={()=>navigate('/user/info')}>
+                 <div className={style.item} onClick={(event)=>click(event)}>
                      <img src={profile} alt={"profile"}/>
                      <div className={style.text}>Профиль</div>
                  </div>
@@ -27,10 +36,6 @@ const Footer = () => {
                  <div className={style.item} onClick={()=>navigate('/user/accumulation')}>
                      <img className={style.icon} src={gift} alt={"gift"}/>
                      <div className={style.text}>Накопления</div>
-                 </div>
-                 <div className={style.item} onClick={() => dispatch(logout())}>
-                     <img className={style.icon} src={logoutImg} alt={"gift"}/>
-                     <div className={style.text}>Выход</div>
                  </div>
              </div>
          </div>

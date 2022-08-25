@@ -7,8 +7,8 @@ import QRcodeLib from "react-qr-code"
 import {useBarcode} from 'next-barcode';
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import {useEffect, useLayoutEffect, useState} from "react";
-import {setIsLoading, setPrompt} from "../../../store/infoUserSlice";
+import {useLayoutEffect} from "react";
+import {setIsLoading} from "../../../store/infoUserSlice";
 
 
 const QRCodePage = () => {
@@ -23,29 +23,6 @@ const QRCode = () => {
     const userName = useSelector<RootState, string>(state => state.infoUser.info?.name as string)
     const dispatch = useAppDispatch()
     const currentCode = localStorage.getItem('current_type_code') as string
-    const isInstalled = localStorage.getItem('isInstalled') as string
-    const [showNotify, setShowNotify] = useState<boolean>(true)
-    let promptEvent: Event | null = null
-
-    window.addEventListener('beforeinstallprompt', function (e) {
-        e.preventDefault();
-        promptEvent = e
-    });
-
-  /*  const presentAddToHome = () => {
-        setShowNotify(false)
-        // @ts-ignore
-        promptEvent?.prompt();  // Wait for the user to respond to the prompt
-        // @ts-ignore
-        promptEvent?.userChoice
-            .then((choice: { outcome: string; }) => {
-                if (choice.outcome === 'accepted') {
-                    localStorage.setItem('isInstalled', '1')
-                } else {
-                    localStorage.setItem('isInstalled', '0')
-                }
-            })
-    }*/
 
     const {inputRef} = useBarcode({
         value: `${infoForCode}`,
@@ -56,34 +33,15 @@ const QRCode = () => {
             displayValue: true
         }
     })
-    useEffect(() => {
-            // @ts-ignore
-            setTimeout(() => {
-                // @ts-ignore
-                promptEvent?.prompt()
-                // @ts-ignore
-                console.log(promptEvent);
-            }, 3000)
 
-            // promptEvent?.prompt()
-        },
-        [])
 
     useLayoutEffect(() => {
         dispatch(setIsLoading(false))
     })
 
-    const closeNotifay = () => {
-        setShowNotify(false)
-
-    }
-
     return (
         <div className={container.container}>
             <section className={style.wrapper}>
-                <div>Здравствуйте,<br/>{userName}!</div>
-                <div className={style.titleQr}>Ваш личный код</div>
-                {/*{ showNotify && <NotifyForInstall closeNotify={closeNotifay} showInstall={presentAddToHome}/>}*/}
                 <Carousel
                     className={style.test}
                     showStatus={false}
@@ -126,46 +84,4 @@ const QRCode = () => {
 
 export default QRCodePage
 
-type NotifyType = {
-    closeNotify: () => void
-    showInstall: () => void
-}
 
-const NotifyForInstall = ({closeNotify, showInstall}: NotifyType) => {
-    return (
-        <div style={{
-            position: 'absolute',
-            top: '50',
-            left: '50',
-            zIndex: '30',
-            color: 'white',
-            backgroundColor: '#373b40',
-            opacity: '0.9',
-            display: "flex",
-            flexDirection: "column",
-            borderRadius: '10px'
-        }}>
-            <div style={{margin: '15px'}}>Хотите установить приложение</div>
-            <div style={{
-                marginTop: '20px',
-                marginBottom: '5px',
-                display: 'flex',
-                justifyContent: "flex-end",
-                paddingRight: '10px'
-            }}>
-                <button style={{
-                    width: '55px',
-                    height: '40px',
-                    backgroundColor: 'blue',
-                    color: 'white',
-                    borderRadius: '5px',
-                    marginRight: '10px'
-                }} onClick={showInstall}>Да
-                </button>
-                <button style={{background: 'red', borderRadius: '5px', width: '55px', height: '40px'}}
-                        onClick={closeNotify}>Нет
-                </button>
-            </div>
-        </div>
-    )
-}

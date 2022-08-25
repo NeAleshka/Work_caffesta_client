@@ -1,0 +1,20 @@
+.settings{
+    background-color: #333333;
+    opacity: .8;
+    border-radius: 5px;
+    padding: 10px;
+    width: fit-content;
+    position: absolute;
+    bottom: 80px;
+    left: 30vw;
+}
+
+.settings_item{
+    opacity:1;
+    color:white;
+    cursor: pointer;
+}
+
+.settings_item:hover{
+    color: #886464;
+}

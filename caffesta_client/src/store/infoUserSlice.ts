@@ -146,6 +146,14 @@ export const setPrompt = createAction('infoUser/setPrompt',
         }
     }
 )
+export const setShowProfileSettings=createAction('infoUser/setShowProfileSettings',
+    (showProfileSettings)=>{
+    return{
+        payload:{
+            showProfileSettings
+        }
+    }
+    })
 
 const initial: IUserDTO = {
     phone: '',
@@ -175,7 +183,8 @@ interface IInitial {
     requestMessage?: string,
     isLoading?: boolean,
     isInitialized?: boolean,
-    prompt?:Event
+    prompt?:Event,
+    showProfileSettings:boolean
 }
 
 const initialState: IInitial = {
@@ -187,7 +196,8 @@ const initialState: IInitial = {
     requestMessage: '',
     isLoading: false,
     isInitialized: false,
-    prompt:undefined
+    prompt:undefined,
+    showProfileSettings:false
 }
 
 const infoUserSlice = createSlice({
@@ -321,6 +331,9 @@ const infoUserSlice = createSlice({
             })
             .addCase(setPrompt,(state, action)=>{
                 state.prompt=action.payload.prompt
+            })
+            .addCase(setShowProfileSettings,(state,action)=>{
+                state.showProfileSettings=action.payload.showProfileSettings
             })
     }
 })
