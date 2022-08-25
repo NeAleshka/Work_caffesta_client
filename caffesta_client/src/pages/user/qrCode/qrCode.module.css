@@ -1,0 +1,82 @@
+
+.wrapper{
+    margin-top: 24px;
+    font-size: 22px;
+    line-height: 27px;
+    width: 100%;
+}
+
+.titleQr{
+    margin:10px 0 10px 0;
+}
+
+.descrBottom{
+    font-size: 22px;
+    line-height: 27px;
+    max-width: 332px;
+    margin: 9px auto 0;
+}
+
+.qrWrapper{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+
+.controls_dot{
+    display: inline-block;
+    font-size: 0;
+    border-radius: 100%;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border: 2px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 250ms ease;
+    position: relative;
+}
+.controls_dot:last-of-type{
+    margin-right: 0
+}
+
+.controls_dot:after{
+    content: "";
+    position: absolute;
+    width: 8px;
+    border-radius: 8px;
+    top: 2px;
+    left: 2px;
+    height: 8px;
+    background-color: #1a1414;
+}
+
+.controls_dot_active{
+    border: 2px solid #1a1414;
+}
+
+.controls_dot_active:after{
+    background-color: #1a1414;
+}
+
+.controls_dot_active:last-child{
+    margin-right: 0;
+}
+
+@media screen and (max-width: 300px) {
+    .qrWrapper{
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .descrBottom{
+        font-size: 16px;
+        line-height: 19px;
+    }
+}
+
+.test{
+    height: 340px;
+}

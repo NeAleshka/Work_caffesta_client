@@ -1,0 +1,41 @@
+.form__body{
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    align-items: center;
+}
+
+
+
+.sec_login  {
+    margin-top: 150px;
+}
+
+.type1 {
+    width: 286px;
+    height: 65px;
+    border-radius: 30px;
+    font-size: 22px;
+    line-height: 27px;
+    background: #1963d2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.type1:hover{
+    opacity: .8;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    transition: .5s ease-out;
+}
+
+.button_text{
+    padding: 0 16px;
+}
+
+.type2{
+    margin-top: 80px;
+    font-size: 20px;
+}
