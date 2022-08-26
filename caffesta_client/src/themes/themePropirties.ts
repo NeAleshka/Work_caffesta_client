@@ -1,7 +1,7 @@
 import {CSSProperties} from "react";
 
 export const theme1:CSSProperties={
-    background:'beige'
+    background:'red'
 }
 
 export const theme2:CSSProperties={

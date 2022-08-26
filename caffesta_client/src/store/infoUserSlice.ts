@@ -362,6 +362,7 @@ const infoUserSlice = createSlice({
                 state.showChooseTheme=action.payload.showChooseTheme
             })
             .addCase(setThemeType,(state, action)=>{
+                localStorage.setItem('current_theme_type',action.payload.themeType as string)
                 state.themeType=action.payload.themeType
             })
     }
