@@ -165,6 +165,15 @@ export const setShowChooseTheme = createAction('infoUser/setShowChooseTheme',
     }
 )
 
+export const setThemeType=createAction('infoUser',
+    (themeType)=>{
+    return{
+        payload:{
+            themeType
+        }
+    }
+    })
+
 const initial: IUserDTO = {
     phone: '',
     email: '',
@@ -196,6 +205,7 @@ interface IInitial {
     prompt?: Event,
     showProfileSettings: boolean
     showChooseTheme: boolean
+    themeType:number
 }
 
 const initialState: IInitial = {
@@ -209,7 +219,8 @@ const initialState: IInitial = {
     isInitialized: false,
     prompt: undefined,
     showProfileSettings: false,
-    showChooseTheme: false
+    showChooseTheme: false,
+    themeType:0
 }
 
 const infoUserSlice = createSlice({
@@ -349,6 +360,9 @@ const infoUserSlice = createSlice({
             })
             .addCase(setShowChooseTheme,(state, action)=>{
                 state.showChooseTheme=action.payload.showChooseTheme
+            })
+            .addCase(setThemeType,(state, action)=>{
+                state.themeType=action.payload.themeType
             })
     }
 })

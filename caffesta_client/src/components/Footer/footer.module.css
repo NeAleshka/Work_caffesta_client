@@ -14,6 +14,10 @@
     cursor: pointer;
 }
 
+.active{
+    color: #333333;
+}
+
 .item:hover {
     color: #0a58ca;
     opacity: .7;
