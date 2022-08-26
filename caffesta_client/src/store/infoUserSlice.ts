@@ -146,14 +146,24 @@ export const setPrompt = createAction('infoUser/setPrompt',
         }
     }
 )
-export const setShowProfileSettings=createAction('infoUser/setShowProfileSettings',
-    (showProfileSettings)=>{
-    return{
-        payload:{
-            showProfileSettings
+export const setShowProfileSettings = createAction('infoUser/setShowProfileSettings',
+    (showProfileSettings) => {
+        return {
+            payload: {
+                showProfileSettings
+            }
+        }
+    })
+
+export const setShowChooseTheme = createAction('infoUser/setShowChooseTheme',
+    (showChooseTheme) => {
+        return {
+            payload: {
+                showChooseTheme
+            }
         }
     }
-    })
+)
 
 const initial: IUserDTO = {
     phone: '',
@@ -183,8 +193,9 @@ interface IInitial {
     requestMessage?: string,
     isLoading?: boolean,
     isInitialized?: boolean,
-    prompt?:Event,
-    showProfileSettings:boolean
+    prompt?: Event,
+    showProfileSettings: boolean
+    showChooseTheme: boolean
 }
 
 const initialState: IInitial = {
@@ -196,8 +207,9 @@ const initialState: IInitial = {
     requestMessage: '',
     isLoading: false,
     isInitialized: false,
-    prompt:undefined,
-    showProfileSettings:false
+    prompt: undefined,
+    showProfileSettings: false,
+    showChooseTheme: false
 }
 
 const infoUserSlice = createSlice({
@@ -329,11 +341,14 @@ const infoUserSlice = createSlice({
             .addCase(setIsEdit, (state, action) => {
                 state.isEdit = action.payload.isEdit
             })
-            .addCase(setPrompt,(state, action)=>{
-                state.prompt=action.payload.prompt
+            .addCase(setPrompt, (state, action) => {
+                state.prompt = action.payload.prompt
             })
-            .addCase(setShowProfileSettings,(state,action)=>{
-                state.showProfileSettings=action.payload.showProfileSettings
+            .addCase(setShowProfileSettings, (state, action) => {
+                state.showProfileSettings = action.payload.showProfileSettings
+            })
+            .addCase(setShowChooseTheme,(state, action)=>{
+                state.showChooseTheme=action.payload.showChooseTheme
             })
     }
 })

@@ -4,15 +4,15 @@
     border-radius: 5px;
     padding: 10px;
     width: fit-content;
-    position: absolute;
-    bottom: 80px;
-    left: 30vw;
+    position: relative;
+    display: flex;
 }
 
 .settings_item{
     opacity:1;
     color:white;
     cursor: pointer;
+    margin-right:10px ;
 }
 
 .settings_item:hover{

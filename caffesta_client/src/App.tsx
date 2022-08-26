@@ -8,7 +8,7 @@ import SendMessage from "./pages/send_message/SendMessage";
 import ConfirmEmail from "./pages/confirmEmail/ConfirmEmail";
 import SingIn from "./pages/sing_in/SingIn";
 import {RootState, useAppDispatch} from "./store";
-import {authMe, setPrompt, setShowProfileSettings} from './store/infoUserSlice'
+import {authMe, setPrompt, setShowChooseTheme, setShowProfileSettings} from './store/infoUserSlice'
 import {CookiesProvider, useCookies} from "react-cookie";
 import {Helmet} from 'react-helmet'
 import {useSelector} from "react-redux";
@@ -45,6 +45,7 @@ function App() {
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
         dispatch(setShowProfileSettings(false))
+        dispatch(setShowChooseTheme(false))
     }
 
     return (

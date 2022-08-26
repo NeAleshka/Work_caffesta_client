@@ -41,3 +41,11 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
 }
+
+.profile_settings_wrapper{
+    display: flex;
+    justify-content: space-around;
+    position:absolute;
+    bottom:80px;
+    width: 100%;
+}

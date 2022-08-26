@@ -10,6 +10,7 @@ import PreLoader from "../../components/PreLoader";
 import {getUser} from "../../store/infoUserSlice";
 import {useCookies} from "react-cookie";
 import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
+import LayOutStyle from "../../components/LayOut/LayOut.module.css";
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
@@ -20,7 +21,6 @@ const User = () => {
     const dispatch=useAppDispatch()
     let [cookies, setCookies] = useCookies()
     let promptEvent=useSelector<RootState,Event|undefined>(state => state.infoUser.prompt)
-    const showProfileSettings=useSelector<RootState,boolean>(state => state.infoUser.showProfileSettings)
 
     useEffect(() => {
         if ( isOnline && !isLogin && isInitialized ) {
@@ -44,7 +44,6 @@ const User = () => {
                 // @ts-ignore
                 promptEvent?.prompt()
                 // @ts-ignore
-                console.log(promptEvent);
             }, 1000)
         },
         [])
@@ -62,7 +61,6 @@ const User = () => {
                             <Route path={'qr_code'} element={<QRCode/>}/>
                         </Routes>}
                 </div>
-                {showProfileSettings && <ProfileSettings/>}
                 <Footer />
             </div>
        :<div></div>)
