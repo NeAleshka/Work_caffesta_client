@@ -1,4 +1,4 @@
-import {createAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit"
+import {createAction, createAsyncThunk, createSlice, current} from "@reduxjs/toolkit"
 import userApi from "../api";
 import {
     IServerResponse, IErrorRequest,
@@ -6,6 +6,7 @@ import {
     IUserDTO,
     IUserInfo,
 } from "../interfaces";
+import {ITheme} from "../themes";
 
 
 export const registrationUser = createAsyncThunk<ILoginResponse, IUserInfo, {
@@ -165,13 +166,22 @@ export const setShowChooseTheme = createAction('infoUser/setShowChooseTheme',
     }
 )
 
-export const setThemeType=createAction('infoUser',
-    (themeType)=>{
-    return{
-        payload:{
-            themeType
+export const setThemeType = createAction('infoUser/setThemeType',
+    (themeType) => {
+        return {
+            payload: {
+                themeType
+            }
         }
-    }
+    })
+
+export const setCurrentTheme = createAction('infoUser/setCurrentTheme',
+    (currentTheme) => {
+        return {
+            payload: {
+                currentTheme
+            }
+        }
     })
 
 const initial: IUserDTO = {
@@ -205,7 +215,8 @@ interface IInitial {
     prompt?: Event,
     showProfileSettings: boolean
     showChooseTheme: boolean
-    themeType:number
+    themeType: number
+    currentTheme: ITheme | null
 }
 
 const initialState: IInitial = {
@@ -220,7 +231,8 @@ const initialState: IInitial = {
     prompt: undefined,
     showProfileSettings: false,
     showChooseTheme: false,
-    themeType:0
+    themeType: 0,
+    currentTheme: null
 }
 
 const infoUserSlice = createSlice({
@@ -358,12 +370,15 @@ const infoUserSlice = createSlice({
             .addCase(setShowProfileSettings, (state, action) => {
                 state.showProfileSettings = action.payload.showProfileSettings
             })
-            .addCase(setShowChooseTheme,(state, action)=>{
-                state.showChooseTheme=action.payload.showChooseTheme
+            .addCase(setShowChooseTheme, (state, action) => {
+                state.showChooseTheme = action.payload.showChooseTheme
             })
-            .addCase(setThemeType,(state, action)=>{
-                localStorage.setItem('current_theme_type',action.payload.themeType as string)
-                state.themeType=action.payload.themeType
+            .addCase(setThemeType, (state, action) => {
+                localStorage.setItem('current_theme_type', action.payload.themeType as string)
+                state.themeType = action.payload.themeType
+            })
+            .addCase(setCurrentTheme,(state, action)=>{
+                state.currentTheme=action.payload?.currentTheme
             })
     }
 })

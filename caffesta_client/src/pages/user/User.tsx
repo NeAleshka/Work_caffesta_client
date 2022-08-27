@@ -10,7 +10,7 @@ import PreLoader from "../../components/PreLoader";
 import {getUser} from "../../store/infoUserSlice";
 import {useCookies} from "react-cookie";
 import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
-import LayOutStyle from "../../components/LayOut/LayOut.module.css";
+import LayOutStyle from "../../components/Header/LayOut.module.css";
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)

@@ -1,4 +1,4 @@
-import container from '../../../components/LayOut/LayOut.module.css'
+import container from '../../../components/Header/LayOut.module.css'
 import style from './qrCode.module.css'
 import QRcode from '../../../../public/qr-code.png'
 import {useSelector} from "react-redux";

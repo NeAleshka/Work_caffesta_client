@@ -1,10 +1,56 @@
 import {CSSProperties} from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../store";
 
-export const theme1:CSSProperties={
-    background:'red'
+export interface ITheme {
+    header: CSSProperties
+    layout: CSSProperties
+    footer: CSSProperties
+    activeText?:CSSProperties
+    button?:CSSProperties
 }
 
-export const theme2:CSSProperties={
-    background:'black',
-    color:"white"
+export const defaultTheme:ITheme={
+    header: {},
+    layout:{},
+    footer:{},
+    activeText:{
+        color:'black'
+    }
+}
+
+export const lightTheme: ITheme = {
+    header: {
+        background: 'red'
+    },
+    layout:{
+        background:'#104939'
+    },
+    footer:{
+        background:'red'
+    },
+    activeText:{
+        color:'black'
+    }
+}
+
+export const darkTheme: ITheme = {
+    header: {
+        background: 'black',
+        color: "white"
+    },
+    layout:{
+        background: 'orange',
+        color: "white"
+    },
+    footer:{
+        background: 'black',
+        color: "white"
+    },
+    activeText:{
+        color:'#a47f7f'
+    },
+    button:{
+        background:'#0e3851'
+    }
 }

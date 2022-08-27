@@ -1,6 +1,6 @@
 import {useFormik} from "formik";
 import styles from '../sing_up/singUp.module.css'
-import mainStyles from '../../components/LayOut/LayOut.module.css'
+import mainStyles from '../../components/Header/LayOut.module.css'
 import user from "../../images/input_icons/user.svg";
 import {useNavigate} from "react-router-dom";
 import {RootState, useAppDispatch} from "../../store";

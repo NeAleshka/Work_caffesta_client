@@ -1,5 +1,5 @@
 import style from './sendMessage.module.css'
-import container from '../../components/LayOut/LayOut.module.css'
+import container from '../../components/Header/LayOut.module.css'
 import otherStyle from '../sing_up/singUp.module.css'
 import {useFormik} from "formik";
 import {useLocation, useNavigate} from "react-router-dom";

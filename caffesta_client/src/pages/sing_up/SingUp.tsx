@@ -1,5 +1,5 @@
 import styles from '../sing_up/singUp.module.css'
-import mainStyles from '../../components/LayOut/LayOut.module.css'
+import mainStyles from '../../components/Header/LayOut.module.css'
 import phone from '../../images/input_icons/Phone.svg'
 import email from '../../images/input_icons/email.svg'
 import user from '../../images/input_icons/user.svg'

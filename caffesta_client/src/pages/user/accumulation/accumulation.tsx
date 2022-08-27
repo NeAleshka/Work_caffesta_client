@@ -1,6 +1,6 @@
 import inputStyle from '../../sing_up/singUp.module.css'
 import styles from '../../sing_up/singUp.module.css'
-import container from '../../../components/LayOut/LayOut.module.css'
+import container from '../../../components/Header/LayOut.module.css'
 import accStyle from './accumulation.module.css'
 import {useSelector} from "react-redux";
 import {RootState} from "../../../store";

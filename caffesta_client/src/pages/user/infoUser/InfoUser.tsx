@@ -1,15 +1,16 @@
-import container from '../../../components/LayOut/LayOut.module.css'
+import container from '../../../components/Header/LayOut.module.css'
 import inputStyle from '../../sing_up/singUp.module.css'
+import styles from '../../sing_up/singUp.module.css'
 import infoStyle from './InfoUser.module.css'
 import {useEffect, useState} from "react";
 import {useSelector} from 'react-redux'
-import {changeUserInfo, logout, setIsEdit} from "../../../store/infoUserSlice";
+import {changeUserInfo, setIsEdit} from "../../../store/infoUserSlice";
 import {RootState, useAppDispatch} from "../../../store";
 import {IUserDTO, IUserInfo} from "../../../interfaces";
 import {useFormik} from "formik";
 import {FormikErrorType} from "../../sing_up/SingUp";
-import styles from "../../sing_up/singUp.module.css";
 import {BounceLoader} from 'react-spinners'
+import Button from "../../../components/Button";
 
 const InfoUser = () => {
     let isNoEdit = useSelector<RootState, boolean>(state => state.infoUser.isEdit as boolean)
@@ -100,11 +101,9 @@ const InfoUser = () => {
                     </div>
                     {formik.touched.lastName && formik.errors.lastName &&
                         <div className={styles.formik_errors}>{formik.errors.lastName}</div>}
-                    <button
+                    <Button
                         className={`${infoStyle.button} ${infoStyle.blue_button} ${isNoEdit ? '' : infoStyle.save_change}`}
-                        type='submit'>
-                        {mode}
-                    </button>
+                        type='submit' text={mode}/>
                     {requestErrorMessage && <div>{requestErrorMessage}</div>}
                 </form>
             }
