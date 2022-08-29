@@ -2,15 +2,15 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../store";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import InfoUser from "./infoUser/InfoUser";
 import Accumulation from "./accumulation/accumulation";
 import QRCode from "./qrCode/QRCode";
 import PreLoader from "../../components/PreLoader";
 import {getUser} from "../../store/infoUserSlice";
 import {useCookies} from "react-cookie";
-import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
-import LayOutStyle from "../../components/Header/LayOut.module.css";
+import DetailsNews from "../news/DetailsNews";
+import style from './User.module.css'
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
@@ -53,12 +53,13 @@ const User = () => {
         isLoading?<PreLoader loading={isLoading}/>:
         isLogin && isInitialized ?
             <div>
-                <div style={{height:'100%'}}>
+                <div className={style.user_wrapper} style={{maxHeight:'80vh',overflow:'auto'}}>
                     {isLoading ? <PreLoader loading={isLoading}/> :
                         <Routes>
                             <Route path={'info'} element={<InfoUser/>}/>
                             <Route path={'accumulation'} element={<Accumulation/>}/>
                             <Route path={'qr_code'} element={<QRCode/>}/>
+                            <Route path={'news'} element={<DetailsNews/>}/>
                         </Routes>}
                 </div>
                 <Footer />

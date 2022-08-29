@@ -1,0 +1,3 @@
+.user_wrapper::-webkit-scrollbar{
+    display: none;
+}

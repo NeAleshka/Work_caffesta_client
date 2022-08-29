@@ -1,5 +1,5 @@
 import axios from "axios";
-import {IUserInfo, ILoginResponse, IUserDTO, IErrorRequest, IServerResponse} from "./interfaces";
+import {IUserInfo, ILoginResponse, IUserDTO, IErrorRequest, IServerResponse, INewsResponse} from "./interfaces";
 
 
 const instants=axios.create({
@@ -31,12 +31,15 @@ const userApi={
         return instants.post('/app/client/logout')
     },
     changeInfo(data:IUserDTO) {
-        return instants.put<IUserDTO, { data: IUserDTO,success:boolean }>('/app/client/change_info',{...data})
+        return instants.put<IUserDTO,{data:IServerResponse} >('/app/client/change_info',{...data}).then(res=>res.data)
     },
     getUser(accessToken:string){
         return instants.get<IServerResponse>('/app/client/get_user',{headers:{
                 'cookies': accessToken
             }}).then(res=>res.data)
+    },
+    getNews(){
+        return instants.get<INewsResponse>('/app/client/get_news').then(res=>res.data)
     }
 }
 

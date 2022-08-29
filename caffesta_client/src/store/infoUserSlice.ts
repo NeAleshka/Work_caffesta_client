@@ -4,7 +4,7 @@ import {
     IServerResponse, IErrorRequest,
     ILoginResponse,
     IUserDTO,
-    IUserInfo,
+    IUserInfo, INewsResponse, INews,
 } from "../interfaces";
 import {ITheme} from "../themes";
 
@@ -54,6 +54,18 @@ export const getUser = createAsyncThunk<IServerResponse, string, {
         }
     }
 )
+
+export const getNews = createAsyncThunk<INewsResponse, undefined, { rejectValue: { error: IErrorRequest } }>('infoUser/getNews',
+    async (_, {rejectWithValue, dispatch}) => {
+        dispatch(setIsLoading(true))
+        try {
+            return userApi.getNews()
+        } catch (e) {
+            return rejectWithValue(e.response.data)
+        } finally {
+            dispatch(setIsLoading(false))
+        }
+    })
 
 export const verificationUser = createAsyncThunk<IServerResponse, string, {
     rejectValue: IErrorRequest
@@ -110,16 +122,17 @@ export const logout = createAsyncThunk(
         }
     })
 
-export const changeUserInfo = createAsyncThunk<{ data?: IUserDTO, success: boolean, error?: IErrorRequest }, IUserDTO, { rejectValue: { error: IErrorRequest } }>(
+export const changeUserInfo = createAsyncThunk<IServerResponse, IUserDTO, { rejectValue: { error: IErrorRequest } }>(
     'infoUser/changeInfo',
     async (data, {rejectWithValue}) => {
         try {
             return userApi.changeInfo(data)
         } catch (e) {
-            return rejectWithValue(e.response.data)
+            return rejectWithValue(e.response)
         }
     }
 )
+
 
 export const setIsEdit = createAction('infoUser/setIsEdit', (isEdit: boolean = false) => {
     return {
@@ -184,6 +197,15 @@ export const setCurrentTheme = createAction('infoUser/setCurrentTheme',
         }
     })
 
+export const setDetailsNewsIndex = createAction('infoUser/setDetailsNewsIndex',
+    (currentIndex) => {
+        return {
+            payload: {
+                currentIndex
+            }
+        }
+    })
+
 const initial: IUserDTO = {
     phone: '',
     email: '',
@@ -217,6 +239,8 @@ interface IInitial {
     showChooseTheme: boolean
     themeType: number
     currentTheme: ITheme | null
+    news:INews[] | null
+    detailsNewsIndex:number
 }
 
 const initialState: IInitial = {
@@ -232,7 +256,9 @@ const initialState: IInitial = {
     showProfileSettings: false,
     showChooseTheme: false,
     themeType: 0,
-    currentTheme: null
+    currentTheme: null,
+    news: null,
+    detailsNewsIndex:0
 }
 
 const infoUserSlice = createSlice({
@@ -352,7 +378,7 @@ const infoUserSlice = createSlice({
             .addCase(changeUserInfo.fulfilled, (state, action) => {
                 state.isEdit = true
                 if (action.payload.success) {
-                    state.info = action.payload.data
+                    state.info = action.payload.userData
                 } else {
                     state.requestMessage = action.payload.error?.message || 'Something error'
                 }
@@ -377,8 +403,22 @@ const infoUserSlice = createSlice({
                 localStorage.setItem('current_theme_type', action.payload.themeType as string)
                 state.themeType = action.payload.themeType
             })
-            .addCase(setCurrentTheme,(state, action)=>{
-                state.currentTheme=action.payload?.currentTheme
+            .addCase(setCurrentTheme, (state, action) => {
+                state.currentTheme = action.payload?.currentTheme
+            })
+            .addCase(getNews.fulfilled, (state, action) => {
+                if (action.payload.success && action.payload.news) {
+                  state.news=action.payload.news
+                }else {
+                    state.requestMessage=action.payload.error?.message|| 'Something error'
+                }
+
+            })
+            .addCase(getNews.rejected,(state,action)=>{
+                state.requestMessage=action.error.message|| 'Something error'
+            })
+            .addCase(setDetailsNewsIndex,(state, action)=>{
+                state.detailsNewsIndex=action.payload.currentIndex
             })
     }
 })

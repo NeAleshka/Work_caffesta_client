@@ -24,11 +24,6 @@ function App() {
     const organizationInfo = useSelector<RootState, IOrganizationInfo>(state => state.infoUser.info?.organizationInfo as IOrganizationInfo)
     const [networkStatus, setNetworkStatus] = useState<boolean>(true)
     let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)
-   /* let [themeProperties, setThemeProperties] = useState<ITheme>({
-        header:{},
-        footer:{},
-        layout:{},
-    })*/
     const themeProperties=useSelector<RootState,ITheme| null>(state => state.infoUser.currentTheme)
 
     window.addEventListener('online', () => {

@@ -58,3 +58,13 @@ export interface IErrorRequest{
     message?:string
     label:string
 }
+
+export interface INewsResponse {
+    news?: INews[]
+    success:boolean
+    error?:IErrorRequest
+}
+export interface INews{
+    title:string
+    description:string
+}
