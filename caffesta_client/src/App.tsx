@@ -54,9 +54,8 @@ function App() {
 
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
-        dispatch(setShowProfileSettings(false))
-        dispatch(setShowChooseTheme(false))
         dispatch(setShowExitModal(false))
+        dispatch(setShowProfileSettings(false))
     }
 
     useEffect(()=>{

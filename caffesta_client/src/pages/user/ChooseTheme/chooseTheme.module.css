@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    margin-top: 30vh;
+}
+
+.item{
+    height: 100px;
+    width: 100px;
+    border-radius: 5px;
+    background-color: chocolate;
+    margin-bottom: 15px;
+}

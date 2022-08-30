@@ -15,7 +15,7 @@ import Button from "../../../components/Button";
 const InfoUser = () => {
     let isNoEdit = useSelector<RootState, boolean>(state => state.infoUser.isEdit as boolean)
     const disabledStyle = isNoEdit ? `${infoStyle.disabled}` : ''
-    const dataUser = useSelector<RootState, IUserDTO>(state => state.infoUser.info as IUserInfo)
+    const dataUser = useSelector<RootState, IUserDTO| undefined>(state => state.infoUser?.info )
     const dispatch = useAppDispatch()
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
     const [infoUser, setInfoUser] = useState(dataUser)
@@ -57,7 +57,7 @@ const InfoUser = () => {
 
     useEffect(() => {
         setInfoUser(dataUser)
-    }, [dataUser])
+    }, [])
 
     return (
         <div className={container.container}>

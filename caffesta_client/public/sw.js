@@ -21,14 +21,14 @@ workbox.precaching.precacheAndRoute([{
     "revision": "99dbb1ac10f49b8b1fcc4879f60b7313",
     "url": "favicon.ico"
 }, {
-    "revision": "14bd8309cbdff92e1977a7e7c3a1a6c0",
+    "revision": "5af7f9100b11d20f50a1d893efc6ab35",
     "url": "index.html"
 }, {
-    "revision": "6fd885036a48c65dc1c9476777ddfc83",
-    "url": "static/css/main.accd9ff3.css"
+    "revision": "34fe14e562aa0702cb6d0217fd983475",
+    "url": "static/css/main.78396966.css"
 }, {
-    "revision": "1733a4fea52cd44a2880c2d0c50dcf27",
-    "url": "static/js/main.0be60f32.js"
+    "revision": "aae85a88c734e705d0d6c07e551ff4d6",
+    "url": "static/js/main.598aba06.js"
 }, {
     "revision": "f537418407238315d85cd43eae6af400",
     "url": "manifest.json"

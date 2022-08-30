@@ -12,6 +12,7 @@ import {useCookies} from "react-cookie";
 import DetailsNews from "../news/DetailsNews";
 import style from './User.module.css'
 import Button from "../../components/Button";
+import ChooseTheme from "./ChooseTheme/ChooseTheme";
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
@@ -60,6 +61,7 @@ const User = () => {
                                 <Route path={'accumulation'} element={<Accumulation/>}/>
                                 <Route path={'qr_code'} element={<QRCode/>}/>
                                 <Route path={'news'} element={<DetailsNews/>}/>
+                                <Route path={'change_theme'} element={<ChooseTheme/>}/>
                             </Routes>}
                     </div>
                     {showExitModal && <ExitModal/>}

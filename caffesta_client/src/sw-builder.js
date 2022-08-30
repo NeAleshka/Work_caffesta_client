@@ -12,7 +12,7 @@ let workboxConfig={
         'static/media/*.*.woff',
     ],
     swSrc:'sw.js',
-    swDest:'../public/sw.js',
+    swDest:'../build/sw.js',
 }
 
 injectManifest(workboxConfig).then(({count,size})=>{

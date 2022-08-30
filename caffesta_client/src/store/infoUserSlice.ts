@@ -388,6 +388,7 @@ const infoUserSlice = createSlice({
             .addCase(changeUserInfo.fulfilled, (state, action) => {
                 state.isEdit = true
                 if (action.payload.success) {
+                    console.log(action.payload)
                     state.info = action.payload.userData
                 } else {
                     state.requestMessage = action.payload.error?.message || 'Something error'
