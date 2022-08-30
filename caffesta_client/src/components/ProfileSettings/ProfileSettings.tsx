@@ -1,10 +1,9 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {logout, setShowChooseTheme, setShowExitModal, setShowProfileSettings} from "../../store/infoUserSlice";
+import {setShowChooseTheme, setShowExitModal, setShowProfileSettings} from "../../store/infoUserSlice";
 import {RootState, useAppDispatch} from "../../store";
 import style from './ProfileSettings.module.css'
 import {useSelector} from "react-redux";
-import Button from "../Button";
 
 
 const ProfileSettings = () => {

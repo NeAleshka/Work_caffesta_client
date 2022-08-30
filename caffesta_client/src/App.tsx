@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import {Route, Routes} from "react-router-dom";
@@ -22,12 +22,12 @@ import {useSelector} from "react-redux";
 import {IOrganizationInfo} from "./interfaces";
 import User from './pages/user/User'
 import favicon from '../src/favicon.ico'
-import {defaultTheme, ITheme, lightTheme, darkTheme} from "./themes";
+import {darkTheme, defaultTheme, ITheme, lightTheme} from "./themes";
 
 
 function App() {
     const dispatch = useAppDispatch()
-    let [cookies, setCookies] = useCookies()
+    let [cookies] = useCookies()
     const organizationInfo = useSelector<RootState, IOrganizationInfo>(state => state.infoUser.info?.organizationInfo as IOrganizationInfo)
     const [networkStatus, setNetworkStatus] = useState<boolean>(true)
     let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)

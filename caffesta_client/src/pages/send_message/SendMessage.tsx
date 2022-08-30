@@ -3,9 +3,9 @@ import container from '../../components/Header/LayOut.module.css'
 import otherStyle from '../sing_up/singUp.module.css'
 import {useFormik} from "formik";
 import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useLayoutEffect} from "react";
+import {useEffect} from "react";
 import {RootState, useAppDispatch} from "../../store";
-import {sendVerificationCode, setIsLoading} from "../../store/infoUserSlice";
+import {sendVerificationCode} from "../../store/infoUserSlice";
 import {useSelector} from "react-redux";
 import PreLoader from "../../components/PreLoader";
 

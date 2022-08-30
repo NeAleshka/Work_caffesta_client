@@ -10,7 +10,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import {CSSProperties, useEffect, useLayoutEffect, useRef, useState} from "react";
 import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUserSlice";
 import {INews} from "../../../interfaces";
-import {Navigate, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import TemplateCodePNG from '../../../images/barcode_template.png'
 
 interface NewsItemProps {
@@ -69,7 +69,7 @@ const QRCode = () => {
 
 
     return (
-        <div className={container.container} style={{maxHeight: '100%'}} ref={QRCodeRef}>
+        <div className={container.container} ref={QRCodeRef}>
             <section className={style.wrapper} style={showTemplateCode? {marginTop:'0'}:{}}>
                 {showTemplateCode && <TemplateCode/>}
                 <Carousel
@@ -120,7 +120,7 @@ const News = () => {
     const news = useSelector<RootState, INews[]>(state => state.infoUser.news as [])
 
     return (
-        <div>
+        <div style={{marginTop:'20px'}}>
             {
                 news?.map((item, index) => <NewsItem key={`${index}_${item.title}`} index={index} title={item.title}/>)
             }
@@ -139,7 +139,7 @@ const NewsItem = ({title, index}: NewsItemProps) => {
     }
 
     return (
-        <div onClick={goToNews} style={{height: '300px'}}>
+        <div onClick={goToNews} style={{height: '300px', backgroundColor:'grey',borderRadius:'10px', marginBottom:'15px'}}>
             <div> {title}</div>
         </div>
     )
@@ -148,6 +148,6 @@ const NewsItem = ({title, index}: NewsItemProps) => {
 const TemplateCode=()=>{
     const currentTheme=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.layout as CSSProperties)
     return(
-      <img src={TemplateCodePNG}  className={style.template_code} style={currentTheme}/>
+      <img src={TemplateCodePNG}  className={style.template_code} style={currentTheme} alt={'code'}/>
     )
 }

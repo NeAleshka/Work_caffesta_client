@@ -21,7 +21,7 @@ const User = () => {
     const isOnline = navigator.onLine
     const dispatch = useAppDispatch()
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
-    let [cookies, setCookies] = useCookies()
+    let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
 
     useEffect(() => {

@@ -10,8 +10,6 @@ import {useSelector} from "react-redux";
 import React, {CSSProperties} from "react";
 import ProfileSettings from "../ProfileSettings/ProfileSettings";
 import ChooseTheme from "../ChooseTheme/ChooseTheme";
-import {ITheme} from "../../themes";
-
 
 const Footer = () => {
     const navigate=useNavigate()
