@@ -11,13 +11,19 @@ import {CSSProperties, useEffect, useLayoutEffect, useRef, useState} from "react
 import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUserSlice";
 import {INews} from "../../../interfaces";
 import {Navigate, useNavigate} from "react-router-dom";
-import TemplateCodeSVG from '../../../images/templateCode.svg'
+import TemplateCodePNG from '../../../images/barcode_template.png'
 
+interface NewsItemProps {
+    title: string
+    index: number
+}
 
 const QRCodePage = () => {
     const userName = useSelector<RootState, string>(state => state.infoUser.info?.name as string)
     if (!userName) {
-        return <div style={{marginTop: "40vh"}}>Sorry we have some problems on the server</div>
+        setTimeout(()=>{
+            return <div style={{marginTop: "40vh"}}>Sorry we have some problems on the server</div>
+        },3000)
     }
     return <QRCode/>
 }
@@ -42,22 +48,16 @@ const QRCode = () => {
         if(QRCodeRef.current){
             // @ts-ignore
             const test=Math.ceil(QRCodeRef.current.getBoundingClientRect().y)
-            // @ts-ignore
-            console.log(Math.ceil(QRCodeRef.current.getBoundingClientRect().top))
             if (test<-40 && !showTemplateCode){
                 setShowTemplateCode(true)
             }else if(test>-40  ){
                setShowTemplateCode(false)
             }
         }
-
     };
     useEffect(()=>{
         window.addEventListener("scroll", scrollHandler, true);
-        // @ts-ignore
     },[])
-
-
 
     useLayoutEffect(() => {
         dispatch(setIsLoading(false))
@@ -70,7 +70,7 @@ const QRCode = () => {
 
     return (
         <div className={container.container} style={{maxHeight: '100%'}} ref={QRCodeRef}>
-            <section className={style.wrapper}>
+            <section className={style.wrapper} style={showTemplateCode? {marginTop:'0'}:{}}>
                 {showTemplateCode && <TemplateCode/>}
                 <Carousel
                         className={showTemplateCode?style.hidden: style.test}
@@ -128,10 +128,7 @@ const News = () => {
     )
 }
 
-interface NewsItemProps {
-    title: string
-    index: number
-}
+
 
 const NewsItem = ({title, index}: NewsItemProps) => {
     const dispatch = useAppDispatch()
@@ -151,6 +148,6 @@ const NewsItem = ({title, index}: NewsItemProps) => {
 const TemplateCode=()=>{
     const currentTheme=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.layout as CSSProperties)
     return(
-      <img src={"https://static.vecteezy.com/system/resources/previews/001/199/360/non_2x/barcode-png.png"} style={{height:'50px',width:'360px',margin:'0 auto',position:'fixed',left:"0",right:'0',backgroundColor:''}}/>
+      <img src={TemplateCodePNG}  className={style.template_code} style={currentTheme}/>
     )
 }

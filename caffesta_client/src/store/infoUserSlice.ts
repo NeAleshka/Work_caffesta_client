@@ -1,4 +1,4 @@
-import {createAction, createAsyncThunk, createSlice, current} from "@reduxjs/toolkit"
+import {createAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import userApi from "../api";
 import {
     IServerResponse, IErrorRequest,
@@ -161,7 +161,7 @@ export const setPrompt = createAction('infoUser/setPrompt',
     }
 )
 export const setShowProfileSettings = createAction('infoUser/setShowProfileSettings',
-    (showProfileSettings) => {
+    (showProfileSettings:boolean) => {
         return {
             payload: {
                 showProfileSettings
@@ -170,7 +170,7 @@ export const setShowProfileSettings = createAction('infoUser/setShowProfileSetti
     })
 
 export const setShowChooseTheme = createAction('infoUser/setShowChooseTheme',
-    (showChooseTheme) => {
+    (showChooseTheme:boolean) => {
         return {
             payload: {
                 showChooseTheme
@@ -189,7 +189,7 @@ export const setThemeType = createAction('infoUser/setThemeType',
     })
 
 export const setCurrentTheme = createAction('infoUser/setCurrentTheme',
-    (currentTheme) => {
+    (currentTheme:ITheme) => {
         return {
             payload: {
                 currentTheme
@@ -198,10 +198,19 @@ export const setCurrentTheme = createAction('infoUser/setCurrentTheme',
     })
 
 export const setDetailsNewsIndex = createAction('infoUser/setDetailsNewsIndex',
-    (currentIndex) => {
+    (currentIndex:number) => {
         return {
             payload: {
                 currentIndex
+            }
+        }
+    })
+
+export const setShowExitModal = createAction('infoUser/setShowExitModal',
+    (showExitModal:boolean) => {
+        return {
+            payload: {
+                showExitModal
             }
         }
     })
@@ -241,6 +250,7 @@ interface IInitial {
     currentTheme: ITheme | null
     news:INews[] | null
     detailsNewsIndex:number
+    showExitModal:boolean
 }
 
 const initialState: IInitial = {
@@ -258,7 +268,8 @@ const initialState: IInitial = {
     themeType: 0,
     currentTheme: null,
     news: null,
-    detailsNewsIndex:0
+    detailsNewsIndex:0,
+    showExitModal:false
 }
 
 const infoUserSlice = createSlice({
@@ -277,7 +288,6 @@ const infoUserSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(registrationUser.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.payload.success) {
                     state.requestMessage = ''
                     state.isSuccessRequest = true
@@ -412,13 +422,15 @@ const infoUserSlice = createSlice({
                 }else {
                     state.requestMessage=action.payload.error?.message|| 'Something error'
                 }
-
             })
             .addCase(getNews.rejected,(state,action)=>{
                 state.requestMessage=action.error.message|| 'Something error'
             })
             .addCase(setDetailsNewsIndex,(state, action)=>{
                 state.detailsNewsIndex=action.payload.currentIndex
+            })
+            .addCase(setShowExitModal,(state, action)=>{
+                state.showExitModal=action.payload.showExitModal
             })
     }
 })

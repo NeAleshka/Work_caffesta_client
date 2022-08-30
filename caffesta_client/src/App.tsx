@@ -8,7 +8,14 @@ import SendMessage from "./pages/send_message/SendMessage";
 import ConfirmEmail from "./pages/confirmEmail/ConfirmEmail";
 import SingIn from "./pages/sing_in/SingIn";
 import {RootState, useAppDispatch} from "./store";
-import {authMe, setCurrentTheme, setPrompt, setShowChooseTheme, setShowProfileSettings} from './store/infoUserSlice'
+import {
+    authMe,
+    setCurrentTheme,
+    setPrompt,
+    setShowChooseTheme,
+    setShowExitModal,
+    setShowProfileSettings
+} from './store/infoUserSlice'
 import {CookiesProvider, useCookies} from "react-cookie";
 import {Helmet} from 'react-helmet'
 import {useSelector} from "react-redux";
@@ -49,6 +56,7 @@ function App() {
         event.stopPropagation()
         dispatch(setShowProfileSettings(false))
         dispatch(setShowChooseTheme(false))
+        dispatch(setShowExitModal(false))
     }
 
     useEffect(()=>{

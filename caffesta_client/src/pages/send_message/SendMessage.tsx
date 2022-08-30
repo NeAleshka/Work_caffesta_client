@@ -52,8 +52,6 @@ const SendMessage = () => {
         }
     },[isVerification])
 
-    console.log('sendMessage ', isLoading);
-
     return (
         <div className={container.container}>
             {isLoading ? <PreLoader loading={isLoading}/>:
