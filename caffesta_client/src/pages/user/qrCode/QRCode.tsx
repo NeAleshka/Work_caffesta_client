@@ -31,6 +31,7 @@ const QRCode = () => {
     const infoForCode = useSelector<RootState, string>(state => state.infoUser.info?.cardNumber as string)
     const dispatch = useAppDispatch()
     const QRCodeRef = useRef(null);
+    const news=useSelector<RootState,INews[]|null>(state => state.infoUser.news)
     const currentCode = localStorage.getItem('current_type_code') as string
     const [showTemplateCode, setShowTemplateCode]=useState<boolean>(false)
 
@@ -64,7 +65,9 @@ const QRCode = () => {
     })
 
     useEffect(() => {
-        dispatch(getNews())
+        if(!news?.length){
+            dispatch(getNews())
+        }
     }, [])
 
 

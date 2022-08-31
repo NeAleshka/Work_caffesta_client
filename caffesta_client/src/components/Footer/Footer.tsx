@@ -23,44 +23,42 @@ const Footer = () => {
 
     const profileClick=(event:React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
-        dispatch(setShowChooseTheme(false))
-        dispatch(setShowProfileSettings(!showProfileSetting))
+        dispatch(setShowProfileSettings(true))
         setIsProfileActive(true)
+        navigate('/user/info')
     }
 
    useEffect(()=>{
-       debugger
-       if( path.includes('info') || path.includes('change_theme')|| showProfileSetting){
+       if(path.includes('info') || path.includes('change_theme')|| showProfileSetting){
            setIsProfileActive(true)
        } else setIsProfileActive(false)
    },[isProfileActive])
 
     const onclick=(to:string)=>{
+        dispatch(setShowProfileSettings(false))
         setIsProfileActive(false)
         navigate(to)
     }
-
-
     return(
         <div>
             <div className={style.profile_settings_wrapper} >
-                {showProfileSetting && <ProfileSettings/>}
+                {showProfileSetting  && <ProfileSettings/>}
                 {showChooseTheme && <ChooseTheme/>}
             </div>
             <div className={style.footer} style={currentTheme}>
                 <div className={`${container.container} ${style.flex}`}>
                     <div className={style.wrapper}>
-                        <div  className={style.item} onClick={(event)=>profileClick(event)}>
+                        <div className={style.item} onClick={(event)=>profileClick(event)}>
                             <img src={profile} alt={"profile"}/>
                             <div style={isProfileActive? activeStyle:{}}  className={style.text}>Профиль</div>
                         </div>
                         <div className={style.item} onClick={()=>onclick('/user/qr_code')}>
                             <img className={style.icon} src={code} alt={"QR"}/>
-                            <div style={!isProfileActive && path.includes('qr_code')?activeStyle:{}} className={style.text}>Мой QR</div>
+                            <div style={ path.includes('qr_code')?activeStyle:{}} className={style.text}>Мой QR</div>
                         </div>
                         <div className={style.item} onClick={()=>onclick('/user/accumulation')}>
                             <img className={style.icon} src={gift} alt={"gift"}/>
-                            <div style={!isProfileActive && path.includes('accumulation')?activeStyle:{}} className={style.text}>Накопления</div>
+                            <div style={path.includes('accumulation')?activeStyle:{}} className={style.text}>Накопления</div>
                         </div>
                     </div>
                 </div>

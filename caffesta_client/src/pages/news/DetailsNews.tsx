@@ -9,6 +9,8 @@ const DetailsNews = () => {
     const newsIndex=useSelector<RootState,number>(state => state.infoUser.detailsNewsIndex)
     const navigate=useNavigate()
 
+    console.log("news", news)
+
     return (
         <div>
             <div onClick={()=>navigate(-1)}>Назад</div>

@@ -15,11 +15,13 @@ const ProfileSettings = () => {
 
     const infoUserClick = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation()
+        dispatch(setShowExitModal(false))
         navigate('/user/info')
     }
 
     const themeClick = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation()
+        dispatch(setShowExitModal(false))
         navigate('/user/change_theme')
     }
 

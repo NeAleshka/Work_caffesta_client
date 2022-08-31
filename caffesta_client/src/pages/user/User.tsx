@@ -1,4 +1,4 @@
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../store";
@@ -13,6 +13,8 @@ import DetailsNews from "../news/DetailsNews";
 import style from './User.module.css'
 import Button from "../../components/Button";
 import ChooseTheme from "./ChooseTheme/ChooseTheme";
+import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
+import {INews} from "../../interfaces";
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
@@ -21,6 +23,7 @@ const User = () => {
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
     const isOnline = navigator.onLine
     const dispatch = useAppDispatch()
+    const news=useSelector<RootState,INews[]>(state => state.infoUser?.news as INews[])
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
@@ -40,15 +43,13 @@ const User = () => {
 
     useEffect(() => {
         dispatch(getUser(cookies.accessToken))
+        setTimeout(() => {
+            // @ts-ignore
+            promptEvent?.prompt()
+        }, 1000)
     }, [])
 
-    useEffect(() => {
-            setTimeout(() => {
-                // @ts-ignore
-                promptEvent?.prompt()
-            }, 1000)
-        },
-        [])
+
 
     return (
         isLoading ? <PreLoader loading={isLoading}/> :

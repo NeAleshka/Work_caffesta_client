@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import Main from "./pages/main/Main";
 import SingUp from "./pages/sing_up/SingUp";
 import SendMessage from "./pages/send_message/SendMessage";
@@ -28,6 +28,7 @@ import {darkTheme, defaultTheme, ITheme, lightTheme} from "./themes";
 function App() {
     const dispatch = useAppDispatch()
     let [cookies] = useCookies()
+    const {pathname}=useLocation()
     const organizationInfo = useSelector<RootState, IOrganizationInfo>(state => state.infoUser.info?.organizationInfo as IOrganizationInfo)
     const [networkStatus, setNetworkStatus] = useState<boolean>(true)
     let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)
@@ -55,7 +56,9 @@ function App() {
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
         dispatch(setShowExitModal(false))
-        dispatch(setShowProfileSettings(false))
+        if(!pathname.includes('info')){
+            dispatch(setShowProfileSettings(false))
+        }
     }
 
     useEffect(()=>{

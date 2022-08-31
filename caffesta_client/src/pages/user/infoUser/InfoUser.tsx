@@ -2,9 +2,9 @@ import container from '../../../components/Header/LayOut.module.css'
 import inputStyle from '../../sing_up/singUp.module.css'
 import styles from '../../sing_up/singUp.module.css'
 import infoStyle from './InfoUser.module.css'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useSelector} from 'react-redux'
-import {changeUserInfo, setIsEdit} from "../../../store/infoUserSlice";
+import {changeUserInfo, setIsEdit, setShowExitModal} from "../../../store/infoUserSlice";
 import {RootState, useAppDispatch} from "../../../store";
 import {IUserDTO, IUserInfo} from "../../../interfaces";
 import {useFormik} from "formik";
@@ -15,11 +15,11 @@ import Button from "../../../components/Button";
 const InfoUser = () => {
     let isNoEdit = useSelector<RootState, boolean>(state => state.infoUser.isEdit as boolean)
     const disabledStyle = isNoEdit ? `${infoStyle.disabled}` : ''
-    const dataUser = useSelector<RootState, IUserDTO| undefined>(state => state.infoUser?.info )
+    const dataUser = useSelector<RootState, IUserDTO | undefined>(state => state.infoUser?.info)
     const dispatch = useAppDispatch()
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
     const [infoUser, setInfoUser] = useState(dataUser)
-    const requestErrorMessage=useSelector<RootState,string>(state => state.infoUser.requestMessage as string)
+    const requestErrorMessage = useSelector<RootState, string>(state => state.infoUser.requestMessage as string)
     let mode = isNoEdit ? 'Редактировать профиль' : 'Сохранить'
 
     const formik = useFormik({
@@ -59,10 +59,14 @@ const InfoUser = () => {
         setInfoUser(dataUser)
     }, [])
 
+    const wrapperClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        dispatch(setShowExitModal(false))
+    }
+
     return (
-        <div className={container.container}>
+        <div className={container.container} onClick={(event) => wrapperClick(event)}>
             {isLoading ? <div>
-                <BounceLoader color={'blue'}/>
+                    <BounceLoader color={'blue'}/>
                 </div> :
                 <form className={inputStyle.form_body} onSubmit={formik.handleSubmit}>
                     <h3 style={{fontWeight: '400', marginTop: '30px'}}>{dataUser?.name ?? 'User Name'}</h3>
