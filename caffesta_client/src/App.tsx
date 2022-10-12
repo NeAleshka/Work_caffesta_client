@@ -10,9 +10,8 @@ import SingIn from "./pages/sing_in/SingIn";
 import {RootState, useAppDispatch} from "./store";
 import {
     authMe,
-    setCurrentTheme,
+    setCurrentTheme, setIsLogin,
     setPrompt,
-    setShowChooseTheme,
     setShowExitModal,
     setShowProfileSettings
 } from './store/infoUserSlice'
@@ -48,9 +47,9 @@ function App() {
 
 
     useEffect(() => {
-        if (networkStatus) {
+        if (networkStatus && (localStorage.getItem('accessToken')|| localStorage.getItem('refreshToken'))) {
             dispatch(authMe(cookies.refreshToken))
-        }
+        }else dispatch(setIsLogin(false))
     }, [networkStatus])
 
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{

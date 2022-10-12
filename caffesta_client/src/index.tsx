@@ -11,11 +11,12 @@ const rootElement = document.getElementById('root') as HTMLElement;
 const root = createRoot(rootElement) ;
 
 root.render(
-    <HashRouter>
+    <BrowserRouter>
+
           <Provider store={index}>
               <App/>
           </Provider>
-      </HashRouter>
+      </BrowserRouter>
 );
 
 

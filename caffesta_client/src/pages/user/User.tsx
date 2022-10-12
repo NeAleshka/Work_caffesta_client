@@ -21,25 +21,17 @@ const User = () => {
     let isInitialized = useSelector<RootState, boolean>(state => state.infoUser.isInitialized as boolean)
     const navigate = useNavigate()
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
-    const isOnline = navigator.onLine
     const dispatch = useAppDispatch()
-    const news=useSelector<RootState,INews[]>(state => state.infoUser?.news as INews[])
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
 
     useEffect(() => {
-        if (isOnline && !isLogin && isInitialized) {
+        if (!isLogin && isInitialized) {
             navigate('/')
         }
     }, [isInitialized, isLogin])
 
-    useEffect(() => {
-        if (!isOnline) {
-            isLogin = true
-            isInitialized = true
-        }
-    }, [isOnline])
 
     useEffect(() => {
         dispatch(getUser(cookies.accessToken))
@@ -48,7 +40,6 @@ const User = () => {
             promptEvent?.prompt()
         }, 1000)
     }, [])
-
 
 
     return (
@@ -68,7 +59,7 @@ const User = () => {
                     {showExitModal && <ExitModal/>}
                     <Footer/>
                 </div>
-                : <div></div>)
+                : <div> Привет</div>)
 }
 
 export default User

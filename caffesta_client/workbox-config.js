@@ -7,11 +7,12 @@ workboxBuild.generateSW({
 		'*.html'
 	],
 	swDest: 'build/sw.js',
-	navigationPreload:true,
 	runtimeCaching:[
 		{
 			urlPattern:new RegExp('http://\\S+'),
-			handler:'CacheFirst'
+			handler:'StaleWhileRevalidate'
 		}
-	]
+	],
+	skipWaiting:true,
+	clientsClaim:true,
 });

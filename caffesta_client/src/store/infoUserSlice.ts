@@ -141,6 +141,13 @@ export const setIsEdit = createAction('infoUser/setIsEdit', (isEdit: boolean = f
         },
     }
 })
+export const setIsLogin = createAction('infoUser/setIsLogin', (isLogin: boolean = false) => {
+    return {
+        payload: {
+            isLogin
+        },
+    }
+})
 
 export const setIsLoading = createAction('infoUser/setIsLoading',
     (isLoading: boolean) => {
@@ -365,6 +372,7 @@ const infoUserSlice = createSlice({
                     state.isVerification = true
                     localStorage.setItem('accessToken', action.payload.userData.accessToken)
                     localStorage.setItem('refreshToken', action.payload.userData.refreshToken)
+                    state.isInitialized=true
                 } else {
                     state.isLogin = false
                     state.requestMessage = action.payload.error?.message || 'Error'
@@ -384,6 +392,8 @@ const infoUserSlice = createSlice({
                 state.isSuccessRequest = false
                 state.isEdit = true
                 state.isLoading = false
+                localStorage.removeItem('accessToken')
+                localStorage.removeItem('refreshToken')
             })
             .addCase(changeUserInfo.fulfilled, (state, action) => {
                 state.isEdit = true
@@ -432,6 +442,9 @@ const infoUserSlice = createSlice({
             })
             .addCase(setShowExitModal,(state, action)=>{
                 state.showExitModal=action.payload.showExitModal
+            })
+            .addCase(setIsLogin,(state, action)=>{
+                state.isLogin=action.payload.isLogin
             })
     }
 })

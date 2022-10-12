@@ -1,5 +1,5 @@
 import styles from './main.module.css'
-import {Outlet, useNavigate} from "react-router-dom";
+import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../store";
 import {setIsLoading} from "../../store/infoUserSlice";
@@ -15,7 +15,7 @@ const Main=()=>{
 
     const onClick = (goTo:string) => {
         dispatch(setIsLoading(true))
-        navigate(goTo)
+        navigate(goTo,{replace:true})
     }
 
     return(
@@ -25,15 +25,13 @@ const Main=()=>{
                     <section className={styles.sec_login}>
                         <div className="form">
                             <form className={styles.form__body} >
-                                <button className={styles.type1}>
+                                <button className={styles.type1} onClick={()=>onClick("/sing_up")}>
                                     <div className={styles.button_text}
-                                         onClick={()=>onClick("/sing_up")}
                                     >Зарегистрироваться</div>
                                 </button>
                             </form>
                             <form className={styles.form__body} >
-                                <button className={`${styles.type1} ${styles.type2}`}
-                                        onClick={()=>onClick('/sing_in')}>
+                                <button className={`${styles.type1} ${styles.type2}`} onClick={()=>onClick('/sing_in')}>
                                     <div className={styles.button_text} >Уже клиент заведения?</div>
                                 </button>
                             </form>
