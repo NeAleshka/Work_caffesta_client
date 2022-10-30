@@ -10,7 +10,7 @@ workboxBuild.generateSW({
 	runtimeCaching:[
 		{
 			urlPattern:new RegExp('http://\\S+'),
-			handler:'StaleWhileRevalidate'
+			handler:'NetworkFirst'
 		}
 	],
 	skipWaiting:true,
