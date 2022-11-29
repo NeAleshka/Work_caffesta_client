@@ -12,6 +12,7 @@ import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUse
 import {INews} from "../../../interfaces";
 import { useNavigate} from "react-router-dom";
 import TemplateCodePNG from '../../../images/barcode_template.png'
+import { useInView } from "react-intersection-observer"
 
 interface NewsItemProps {
     title: string
@@ -33,7 +34,10 @@ const QRCode = () => {
     const QRCodeRef = useRef(null);
     const news=useSelector<RootState,INews[]|null>(state => state.infoUser.news)
     const currentCode = localStorage.getItem('current_type_code') as string
-    const [showTemplateCode, setShowTemplateCode]=useState<boolean>(false)
+    const [ ref, showTemplateCode ] = useInView({
+        threshold: 0,
+        rootMargin:'-150px'
+    });
 
     const {inputRef} = useBarcode({
         value: `${infoForCode}`,
@@ -44,22 +48,6 @@ const QRCode = () => {
             height: 250
         }
     })
-
-    const scrollHandler = () => {
-        if(QRCodeRef.current){
-            // @ts-ignore
-            const test=Math.ceil(QRCodeRef.current.getBoundingClientRect().y)
-            if (test<-40 && !showTemplateCode){
-                setShowTemplateCode(true)
-            }else if(test>-40  ){
-               setShowTemplateCode(false)
-            }
-        }
-    };
-    useEffect(()=>{
-        window.addEventListener("scroll", scrollHandler, true);
-    },[])
-
     useLayoutEffect(() => {
         dispatch(setIsLoading(false))
     })
@@ -70,13 +58,13 @@ const QRCode = () => {
         }
     }, [])
 
-
     return (
         <div className={container.container} ref={QRCodeRef}>
-            <section className={style.wrapper} style={showTemplateCode? {marginTop:'0'}:{}}>
-                {showTemplateCode && <TemplateCode/>}
-                <Carousel
-                        className={showTemplateCode?style.hidden: style.test}
+            <section className={style.wrapper} style={!showTemplateCode? {marginTop:'0'}:{}}>
+                {!showTemplateCode && <TemplateCode/>}
+                <div ref={ref} >
+                    <Carousel
+                        className={!showTemplateCode?style.hidden: style.test}
                         showStatus={false}
                         showThumbs={false}
                         showArrows={false}
@@ -109,6 +97,8 @@ const QRCode = () => {
                             <svg ref={inputRef}/>
                         </div>
                     </Carousel>
+                </div>
+
                 <div className={style.descrBottom}>Предъявите его кассиру перед оплатой для начисления бонусов</div>
                 <News/>
             </section>
@@ -151,6 +141,6 @@ const NewsItem = ({title, index}: NewsItemProps) => {
 const TemplateCode=()=>{
     const currentTheme=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.layout as CSSProperties)
     return(
-      <img src={TemplateCodePNG}  className={style.template_code} style={currentTheme} alt={'code'}/>
+        <img src={TemplateCodePNG}  className={style.template_code} style={currentTheme} alt={'code'}/>
     )
 }
