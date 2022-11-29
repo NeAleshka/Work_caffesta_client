@@ -13,8 +13,7 @@ import DetailsNews from "../news/DetailsNews";
 import style from './User.module.css'
 import Button from "../../components/Button";
 import ChooseTheme from "./ChooseTheme/ChooseTheme";
-import ProfileSettings from "../../components/ProfileSettings/ProfileSettings";
-import {INews} from "../../interfaces";
+
 
 const User = () => {
     let isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
@@ -23,7 +22,6 @@ const User = () => {
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
     const isOnline = navigator.onLine
     const dispatch = useAppDispatch()
-    const news=useSelector<RootState,INews[]>(state => state.infoUser?.news as INews[])
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)

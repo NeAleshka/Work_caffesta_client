@@ -222,6 +222,15 @@ export const setShowExitModal = createAction('infoUser/setShowExitModal',
         }
     })
 
+export const setShowMenu = createAction('infoUser/setShowMenu',
+    (setShowMenu:boolean) => {
+        return {
+            payload: {
+                setShowMenu
+            }
+        }
+    })
+
 const initial: IUserDTO = {
     phone: '',
     email: '',
@@ -258,6 +267,7 @@ interface IInitial {
     news:INews[] | null
     detailsNewsIndex:number
     showExitModal:boolean
+    showMenu:boolean
 }
 
 const initialState: IInitial = {
@@ -276,7 +286,8 @@ const initialState: IInitial = {
     currentTheme: null,
     news: null,
     detailsNewsIndex:0,
-    showExitModal:false
+    showExitModal:false,
+    showMenu:false,
 }
 
 const infoUserSlice = createSlice({
@@ -445,6 +456,9 @@ const infoUserSlice = createSlice({
             })
             .addCase(setIsLogin,(state, action)=>{
                 state.isLogin=action.payload.isLogin
+            })
+            .addCase(setShowMenu,(state, action)=>{
+                state.showMenu=action.payload.setShowMenu
             })
     }
 })

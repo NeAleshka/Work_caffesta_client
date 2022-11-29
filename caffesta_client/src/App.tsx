@@ -23,6 +23,7 @@ import {IOrganizationInfo} from "./interfaces";
 import User from './pages/user/User'
 import favicon from '../src/favicon.ico'
 import {darkTheme, defaultTheme, ITheme, lightTheme} from "./themes";
+import Menu from "./components/Menu/Menu";
 
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
             </Helmet>
             <div className="App" onClick={(event)=>{hideProfileSettings(event)}} style={themeProperties?.layout}>
                 <Header themeStyle={themeProperties?.header??{} }/>
+                <Menu/>
                 <Routes>
                     <Route path={'/'} element={
                         <Main/>
