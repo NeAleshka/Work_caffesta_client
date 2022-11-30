@@ -327,6 +327,7 @@ const infoUserSlice = createSlice({
                     state.isLogin = true
                     state.isInitialized = true
                     state.requestMessage = ''
+                    localStorage.setItem('auth','success')
                 } else {
                     state.requestMessage = action.payload.error?.message
                 }

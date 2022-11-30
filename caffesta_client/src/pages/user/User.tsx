@@ -7,7 +7,7 @@ import InfoUser from "./infoUser/InfoUser";
 import Accumulation from "./accumulation/accumulation";
 import QRCode from "./qrCode/QRCode";
 import PreLoader from "../../components/PreLoader";
-import {getUser, logout, setShowExitModal} from "../../store/infoUserSlice";
+import {authMe, getUser, logout, setShowExitModal} from "../../store/infoUserSlice";
 import {useCookies} from "react-cookie";
 import DetailsNews from "../news/DetailsNews";
 import style from './User.module.css'
@@ -26,6 +26,8 @@ const User = () => {
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
 
+
+
     useEffect(() => {
         if (isOnline && !isLogin && isInitialized) {
             navigate('/')
@@ -40,14 +42,13 @@ const User = () => {
     }, [isOnline])
 
     useEffect(() => {
+        dispatch(authMe(cookies.accessToken))
         dispatch(getUser(cookies.accessToken))
         setTimeout(() => {
             // @ts-ignore
             promptEvent?.prompt()
         }, 1000)
     }, [])
-
-
 
     return (
         isLoading ? <PreLoader loading={isLoading}/> :
@@ -64,7 +65,7 @@ const User = () => {
                             </Routes>}
                     </div>
                     {showExitModal && <ExitModal/>}
-                    <Footer/>
+                    {/*<Footer/>*/}
                 </div>
                 : <div></div>)
 }

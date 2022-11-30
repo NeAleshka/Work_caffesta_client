@@ -12,7 +12,6 @@ import {
     authMe,
     setCurrentTheme,
     setPrompt,
-    setShowChooseTheme,
     setShowExitModal,
     setShowProfileSettings
 } from './store/infoUserSlice'
@@ -49,7 +48,7 @@ function App() {
 
 
     useEffect(() => {
-        if (networkStatus) {
+        if (localStorage.getItem('refreshToken')) {
             dispatch(authMe(cookies.refreshToken))
         }
     }, [networkStatus])

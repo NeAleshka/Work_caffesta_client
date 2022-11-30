@@ -20,9 +20,16 @@
 .qrWrapper {
     width: 300px;
     height: 300px;
-    margin: 0 auto;
+    display: contents;
+
 }
 
+.qr_content{
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
 
 .controls_dot {
     display: inline-block;
@@ -50,15 +57,15 @@
     top: 2px;
     left: 2px;
     height: 8px;
-    background-color: #1a1414;
+    background-color: white;
 }
 
 .controls_dot_active {
-    border: 2px solid #1a1414;
+    border: 2px solid white;
 }
 
 .controls_dot_active:after {
-    background-color: #1a1414;
+    background-color:white;
 }
 
 .controls_dot_active:last-child {
@@ -87,11 +94,17 @@
 }
 
 .template_code{
-    height:50px;
     width:360px;
-    margin:0 auto;
-    position:fixed;
+    margin:0 auto 50px;
     left:0;
     right:0;
     background-color: #efefef;
+    position: fixed;
+}
+
+.item_news{
+    height: 300px;
+    background-color: grey;
+    border-radius: 10px;
+    margin: 0 5px 15px ;
 }

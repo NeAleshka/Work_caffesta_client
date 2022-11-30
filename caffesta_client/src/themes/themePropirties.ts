@@ -13,7 +13,7 @@ export const defaultTheme:ITheme={
     layout:{},
     footer:{},
     activeText:{
-        color:'black'
+        color:'gray'
     }
 }
 
@@ -28,7 +28,7 @@ export const lightTheme: ITheme = {
         background:'red'
     },
     activeText:{
-        color:'black'
+        color:'gray'
     }
 }
 
