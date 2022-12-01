@@ -12,8 +12,8 @@ const DetailsNews = () => {
     return (
         <div>
             <div onClick={()=>navigate(-1)}>Назад</div>
-            <div>{news[newsIndex].title}</div>
-            <div>{news[newsIndex].description}</div>
+            <div>{news[newsIndex]?.title}</div>
+            <div>{news[newsIndex]?.description}</div>
         </div>
     );
 };

@@ -1,15 +1,16 @@
 import style from './footer.module.css'
 import container from '../Header/LayOut.module.css'
-import profile from '../../images/footer_icons/profile.svg'
-import code from '../../images/footer_icons/qr.svg'
+import wallet from '../../images/footer_icons/wallet.svg'
+import home from '../../images/footer_icons/home.svg'
 import gift from '../../images/footer_icons/gift.svg'
 import {useLocation, useNavigate} from "react-router-dom";
 import {RootState, useAppDispatch} from "../../store";
-import {setShowChooseTheme, setShowProfileSettings} from "../../store/infoUserSlice";
 import {useSelector} from "react-redux";
 import React, {CSSProperties, useEffect, useState} from "react";
 import ProfileSettings from "../ProfileSettings/ProfileSettings";
 import ChooseTheme from "../../pages/user/ChooseTheme/ChooseTheme";
+import {setShowProfileSettings} from "../../store/infoUserSlice";
+import {IBonuses} from "../../interfaces";
 
 const Footer = () => {
     const navigate=useNavigate()
@@ -20,6 +21,7 @@ const Footer = () => {
     const currentTheme=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.footer as CSSProperties)
     const activeStyle=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.activeText as CSSProperties)
     const [isProfileActive,setIsProfileActive]=useState<boolean>(false)
+    const bonuses=useSelector<RootState,IBonuses>(state => state.infoUser.info?.bonuses as IBonuses)
 
     const profileClick=(event:React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
@@ -48,18 +50,19 @@ const Footer = () => {
             <div className={style.footer} style={currentTheme}>
                 <div className={`${container.container} ${style.flex}`}>
                     <div className={style.wrapper}>
-                        <div className={style.item} onClick={(event)=>profileClick(event)}>
-                            <img src={profile} alt={"profile"}/>
-                            <div style={isProfileActive? activeStyle:{}}  className={style.text}>Профиль</div>
-                        </div>
+                        <div className={`${style.item} ${style.wallet_wrapper}`} onClick={(event)=>profileClick(event)}>
+                                <img src={wallet} alt={"wallet"}/>
+                                <div className={style.wallet_info}>
+                                    <div style={isProfileActive? activeStyle:{}}  className={style.text}>МОЙ КОШЕЛЁК</div>
+                                    <div className={style.text}>{bonuses.bonus}</div>
+                                </div>
+                            </div>
                         <div className={style.item} onClick={()=>onclick('/user/qr_code')}>
-                            <img className={style.icon} src={code} alt={"QR"}/>
-                            <div style={ path.includes('qr_code')?activeStyle:{}} className={style.text}>Мой QR</div>
-                        </div>
-                        <div className={style.item} onClick={()=>onclick('/user/accumulation')}>
-                            <img className={style.icon} src={gift} alt={"gift"}/>
-                            <div style={path.includes('accumulation')?activeStyle:{}} className={style.text}>Накопления</div>
-                        </div>
+                                <img className={style.icon} src={home} alt={"QR"}/>
+                            </div>
+                        <div className={style.item}  onClick={()=>onclick('/user/accumulation')}>
+                                    <div style={path.includes('accumulation')?activeStyle:{}} className={style.text}>БЛЮДА ЗА БАЛЛЫ</div>
+                                </div>
                     </div>
                 </div>
             </div>

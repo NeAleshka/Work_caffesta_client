@@ -13,6 +13,9 @@ import DetailsNews from "../news/DetailsNews";
 import style from './User.module.css'
 import Button from "../../components/Button";
 import ChooseTheme from "./ChooseTheme/ChooseTheme";
+import Wallet from "./Wallet/Wallet";
+import Promotions from "./promotions/promotions";
+import BallsMenu from "./BallsMenu/BallsMenu";
 
 
 const User = () => {
@@ -62,10 +65,13 @@ const User = () => {
                                 <Route path={'qr_code'} element={<QRCode/>}/>
                                 <Route path={'news'} element={<DetailsNews/>}/>
                                 <Route path={'change_theme'} element={<ChooseTheme/>}/>
+                                <Route path={'wallet'} element={<Wallet/>}/>
+                                <Route path={'promotions'} element={<Promotions/>}/>
+                                <Route path={'balls_menu'} element={<BallsMenu/>}/>
                             </Routes>}
                     </div>
                     {showExitModal && <ExitModal/>}
-                    {/*<Footer/>*/}
+                    <Footer/>
                 </div>
                 : <div></div>)
 }

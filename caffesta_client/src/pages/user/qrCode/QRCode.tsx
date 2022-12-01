@@ -1,17 +1,14 @@
 import container from '../../../components/Header/LayOut.module.css'
 import style from './qrCode.module.css'
-import QRcode from '../../../../public/qr-code.png'
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../../store";
-import QRcodeLib from "react-qr-code"
 import {useBarcode} from 'next-barcode';
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import {CSSProperties, useEffect, useLayoutEffect, useRef} from "react";
+import {useEffect, useLayoutEffect, useRef} from "react";
 import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUserSlice";
 import {INews} from "../../../interfaces";
 import {useNavigate} from "react-router-dom";
-import TemplateCodePNG from '../../../images/barcode_template.png'
 import {useInView} from "react-intersection-observer"
 
 interface NewsItemProps {
@@ -32,6 +29,7 @@ const QRCode = () => {
     const infoForCode = useSelector<RootState, string>(state => state.infoUser.info?.cardNumber as string)
     const dispatch = useAppDispatch()
     const QRCodeRef = useRef(null);
+    const navigate = useNavigate()
     const news = useSelector<RootState, INews[] | null>(state => state.infoUser.news)
     const [ref, showTemplateCode] = useInView({
         threshold: 0,
@@ -47,6 +45,8 @@ const QRCode = () => {
             height: 250
         }
     })
+
+
     useLayoutEffect(() => {
         dispatch(setIsLoading(false))
     })
@@ -60,15 +60,20 @@ const QRCode = () => {
     return (
         <div className={container.container} ref={QRCodeRef}>
             <section className={style.wrapper} style={!showTemplateCode ? {marginTop: '0'} : {}}>
-                {!showTemplateCode && <TemplateCode/>}
                 <div className={style.qr_content} ref={ref}>
                     <div className={style.qrWrapper}>
                         <svg ref={inputRef}/>
                     </div>
                 </div>
                 <News/>
+                <div className={style.list}>
+                    <div className={style.list_item} onClick={() => navigate('/user/promotions')}>АКЦИИ</div>
+                    <hr color={'grey'} style={{width: '100%'}}/>
+                    <div className={style.list_item} onClick={() => navigate('/user/ball_menu')}>МЕНЮ ЗА БАЛЛЫ</div>
+                    <hr color={'grey'} style={{width: '100%'}}/>
+                    <div className={style.list_item} onClick={() => navigate('/user/wallet')}>КОШЕЛЁК</div>
+                </div>
             </section>
-
         </div>
     )
 }
@@ -77,8 +82,6 @@ export default QRCodePage
 
 const News = () => {
     const news = useSelector<RootState, INews[]>(state => state.infoUser.news as [])
-
-
     return (
         <Carousel
             showStatus={false}
@@ -88,9 +91,6 @@ const News = () => {
             swipeable
             dynamicHeight={true}
             renderIndicator={(onClickHandler, isSelected, index, label) => {
-                {
-                    isSelected && localStorage.setItem('current_type_code', index.toString())
-                }
                 return (
                     <span
                         className={`${style.controls_dot} ${
@@ -109,7 +109,6 @@ const News = () => {
             {
                 news?.map((item, index) => <NewsItem key={`${index}_${item.title}`} index={index} title={item.title}/>)
             }
-
         </Carousel>
     )
 }
@@ -126,13 +125,12 @@ const NewsItem = ({title, index}: NewsItemProps) => {
     return (
         <div onClick={goToNews}
              className={style.item_news}>
-            <div> {title}</div>
+            <div>{title}</div>
         </div>
     )
 }
 
 const TemplateCode = () => {
-    const currentTheme = useSelector<RootState, CSSProperties>(state => state.infoUser.currentTheme?.layout as CSSProperties)
     const infoForCode = useSelector<RootState, string>(state => state.infoUser.info?.cardNumber as string)
     const {inputRef} = useBarcode({
         value: `${infoForCode}`,
