@@ -5,11 +5,11 @@ import {RootState, useAppDispatch} from "../../../store";
 import {useBarcode} from 'next-barcode';
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import {useEffect, useLayoutEffect, useRef} from "react";
+import {useEffect, useLayoutEffect, useState} from "react";
 import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUserSlice";
 import {INews} from "../../../interfaces";
 import {useNavigate} from "react-router-dom";
-import {useInView} from "react-intersection-observer"
+import Footer from "../../../components/Footer/Footer";
 
 interface NewsItemProps {
     title: string
@@ -28,13 +28,8 @@ const QRCodePage = () => {
 const QRCode = () => {
     const infoForCode = useSelector<RootState, string>(state => state.infoUser.info?.cardNumber as string)
     const dispatch = useAppDispatch()
-    const QRCodeRef = useRef(null);
     const navigate = useNavigate()
     const news = useSelector<RootState, INews[] | null>(state => state.infoUser.news)
-    const [ref, showTemplateCode] = useInView({
-        threshold: 0,
-        rootMargin: '-150px'
-    });
 
     const {inputRef} = useBarcode({
         value: `${infoForCode}`,
@@ -45,7 +40,6 @@ const QRCode = () => {
             height: 250
         }
     })
-
 
     useLayoutEffect(() => {
         dispatch(setIsLoading(false))
@@ -58,9 +52,9 @@ const QRCode = () => {
     }, [])
 
     return (
-        <div className={container.container} ref={QRCodeRef}>
-            <section className={style.wrapper} style={!showTemplateCode ? {marginTop: '0'} : {}}>
-                <div className={style.qr_content} ref={ref}>
+        <div className={container.container}>
+            <section className={style.wrapper}>
+                <div className={style.qr_content}>
                     <div className={style.qrWrapper}>
                         <svg ref={inputRef}/>
                     </div>
@@ -87,7 +81,6 @@ const News = () => {
             showStatus={false}
             showThumbs={true}
             showArrows={false}
-            infiniteLoop
             swipeable
             dynamicHeight={true}
             renderIndicator={(onClickHandler, isSelected, index, label) => {

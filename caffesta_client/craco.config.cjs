@@ -8,6 +8,7 @@ module.exports = {
                     swDest:'sw.js',
                     skipWaiting:true,
                     clientsClaim:true,
+                    disableDevLogs:true,
                     navigateFallback:'./index.html',
                     runtimeCaching:[
                         {

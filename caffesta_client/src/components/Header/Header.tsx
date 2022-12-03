@@ -13,7 +13,6 @@ interface IHeaderThemeStyle{
 
 const Header = ({themeStyle}:IHeaderThemeStyle) => {
     const isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
-    const navigate=useNavigate()
     const dispatch=useAppDispatch()
     const showMenu=useSelector<RootState,boolean>(state => state.infoUser.showMenu)
 
@@ -23,8 +22,9 @@ const Header = ({themeStyle}:IHeaderThemeStyle) => {
                 <div className={styles.container}>
                     <div className={styles.logo}>
                         {isLogin && <img src={user} alt="logo" onClick={()=>dispatch(setShowMenu(!showMenu))}/>}
-                        <div className={styles.logoTitle}
-                           onClick={()=> navigate(`${isLogin ? '/user/qr_code' : '/'}`) }>{`${localStorage.getItem('organizationName') ? localStorage.getItem('organizationName') : 'Caffesta'}`}</div>
+                        <div className={styles.logoTitle}>
+                            {`${localStorage.getItem('organizationName') ?? 'Caffesta'}`}
+                        </div>
                         {isLogin && <img src={feed}/>}
                     </div>
 

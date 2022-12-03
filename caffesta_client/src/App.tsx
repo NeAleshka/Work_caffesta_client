@@ -10,7 +10,7 @@ import SingIn from "./pages/sing_in/SingIn";
 import {RootState, useAppDispatch} from "./store";
 import {
     authMe,
-    setCurrentTheme,
+    setCurrentTheme, setIsEdit,
     setPrompt,
     setShowExitModal,
     setShowProfileSettings
@@ -55,6 +55,8 @@ function App() {
 
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
+        event.preventDefault()
+        dispatch(setIsEdit(true))
         dispatch(setShowExitModal(false))
         if(!pathname.includes('info')){
             dispatch(setShowProfileSettings(false))
@@ -91,7 +93,7 @@ function App() {
                 <link rel="icon" href={`${organizationInfo?.logo ?? favicon}`}/>
             </Helmet>
             <div className="App" onClick={(event)=>{hideProfileSettings(event)}} style={themeProperties?.layout}>
-                <Header themeStyle={themeProperties?.header??{} }/>
+                 <Header themeStyle={themeProperties?.header??{} }/>
                 <Menu/>
                 <Routes>
                     <Route path={'/'} element={

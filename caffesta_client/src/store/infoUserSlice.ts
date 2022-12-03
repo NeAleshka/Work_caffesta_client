@@ -231,6 +231,7 @@ export const setShowMenu = createAction('infoUser/setShowMenu',
         }
     })
 
+
 const initial: IUserDTO = {
     phone: '',
     email: '',

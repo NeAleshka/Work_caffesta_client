@@ -3,11 +3,11 @@
     bottom: 0;
     width: 100%;
     background-color: black;
-    height: 72px;
+    height: 60px;
 }
 
 .icon {
-    width: 40px;
+    width: 25px;
 }
 
 .item {
@@ -15,12 +15,7 @@
 }
 
 .active{
-    color: #333333;
-}
-
-.item:hover {
-    color: #0a58ca;
-    opacity: .7;
+    color: white;
 }
 
 .text {

@@ -1,4 +1,4 @@
-.description{
+.description {
     font-size: 20px;
     line-height: 25px;
     margin-top: 34px;
@@ -7,11 +7,11 @@
 }
 
 
-.secRegister{
+.secRegister {
     width: 305px;
 }
 
-.form_body{
+.form_body {
     display: flex;
     -webkit-box-orient: vertical;
     flex-direction: column;
@@ -42,21 +42,22 @@ input::-webkit-calendar-picker-indicator {
 }
 
 
-.input_data{
+.input_data {
     position: relative;
-    border: 1px solid rgba(0,0,0,.35);
+    border: 1px solid rgba(0, 0, 0, .35);
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 1.5rem;
     line-height: 20px;
     font-weight: 500;
     transition: .5s;
-    background-color: #fff;
     max-width: 305px;
-    height: 44px;
-    padding: 2px 9px;
+    padding: 2px 0;
+    color: white;
+    background-color: black;
+    outline: none;
 }
 
-.input_icons{
+.input_icons {
     position: absolute;
     width: 25px;
     right: 20px;
@@ -64,7 +65,7 @@ input::-webkit-calendar-picker-indicator {
     pointer-events: none;
 }
 
-.submitButton{
+.submitButton {
     margin-top: 20px;
     max-width: 286px;
     height: 65px;
@@ -76,25 +77,41 @@ input::-webkit-calendar-picker-indicator {
     color: #fff;
     border: 0;
     width: 100%;
-    font-family: Geometria,sans-serif;
+    font-family: Geometria, sans-serif;
     padding: 0 12px;
 }
 
-.submitButtonError{
+.submitButtonError {
     background-color: cadetblue;
 }
 
-.submitButton:hover{
+.submitButton:hover {
     opacity: .8;
     box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
     transition: .5s ease-out;
 }
 
-.data_picker{
+.data_picker {
     width: 285px;
 }
 
-.formik_errors{
+.formik_errors {
     color: red;
     font-size: 15px;
+}
+
+.profile_header {
+    display: flex;
+    margin-bottom: 6vh;
+    width: 100%;
+}
+
+.header_title{
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.title{
+    width: fit-content;
+    font-size: 13px;
 }

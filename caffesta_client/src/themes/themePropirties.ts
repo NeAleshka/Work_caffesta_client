@@ -13,7 +13,7 @@ export const defaultTheme:ITheme={
     layout:{},
     footer:{},
     activeText:{
-        color:'gray'
+        color:'white'
     }
 }
 

@@ -28,7 +28,7 @@ const User = () => {
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
-
+    const path=useLocation().pathname
 
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const User = () => {
         isLoading ? <PreLoader loading={isLoading}/> :
             isLogin && isInitialized ?
                 <div>
-                    <div className={style.user_wrapper} style={{maxHeight: '80vh', overflow: 'auto'}}>
+                    <div id={'user_page'} className={style.user_wrapper} style={{maxHeight: '80vh', overflow: 'auto'}}>
                         {isLoading ? <PreLoader loading={isLoading}/> :
                             <Routes>
                                 <Route path={'info'} element={<InfoUser/>}/>
@@ -70,8 +70,7 @@ const User = () => {
                                 <Route path={'balls_menu'} element={<BallsMenu/>}/>
                             </Routes>}
                     </div>
-                    {showExitModal && <ExitModal/>}
-                    <Footer/>
+                    {path.includes('user/qr_code') && <Footer/> }
                 </div>
                 : <div></div>)
 }

@@ -19,56 +19,53 @@ const Footer = () => {
     const showProfileSetting=useSelector<RootState,boolean>(state => state.infoUser.showProfileSettings)
     const showChooseTheme=useSelector<RootState,boolean>(state => state.infoUser.showChooseTheme)
     const currentTheme=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.footer as CSSProperties)
-    const activeStyle=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.activeText as CSSProperties)
-    const [isProfileActive,setIsProfileActive]=useState<boolean>(false)
+    // const activeStyle=useSelector<RootState,CSSProperties>(state => state.infoUser.currentTheme?.activeText as CSSProperties)
     const bonuses=useSelector<RootState,IBonuses>(state => state.infoUser.info?.bonuses as IBonuses)
 
     const profileClick=(event:React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
         dispatch(setShowProfileSettings(true))
-        setIsProfileActive(true)
         navigate('/user/info')
     }
 
-   useEffect(()=>{
-       if(path.includes('info') || path.includes('change_theme')|| showProfileSetting){
-           setIsProfileActive(true)
-       } else setIsProfileActive(false)
-   },[isProfileActive])
-
     const onclick=(to:string)=>{
         dispatch(setShowProfileSettings(false))
-        setIsProfileActive(false)
         navigate(to)
     }
+
+    const test = () => {
+      document.getElementById('user_page')?.scrollTo({
+          top:0,
+          behavior:'smooth'
+      })
+    }
+
     return(
         <div>
-            <div className={style.profile_settings_wrapper} >
+           {/* <div className={style.profile_settings_wrapper} >
                 {showProfileSetting  && <ProfileSettings/>}
                 {showChooseTheme && <ChooseTheme/>}
-            </div>
+            </div>*/}
             <div className={style.footer} style={currentTheme}>
                 <div className={`${container.container} ${style.flex}`}>
                     <div className={style.wrapper}>
                         <div className={`${style.item} ${style.wallet_wrapper}`} onClick={(event)=>profileClick(event)}>
                                 <img src={wallet} alt={"wallet"}/>
                                 <div className={style.wallet_info}>
-                                    <div style={isProfileActive? activeStyle:{}}  className={style.text}>МОЙ КОШЕЛЁК</div>
+                                    <div className={style.text}>МОЙ КОШЕЛЁК</div>
                                     <div className={style.text}>{bonuses.bonus}</div>
                                 </div>
                             </div>
-                        <div className={style.item} onClick={()=>onclick('/user/qr_code')}>
+                        <div className={style.item} onClick={test}>
                                 <img className={style.icon} src={home} alt={"QR"}/>
                             </div>
                         <div className={style.item}  onClick={()=>onclick('/user/accumulation')}>
-                                    <div style={path.includes('accumulation')?activeStyle:{}} className={style.text}>БЛЮДА ЗА БАЛЛЫ</div>
+                                    <div className={style.text}>БЛЮДА ЗА БАЛЛЫ</div>
                                 </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
   )
 }
 export default Footer
