@@ -4,7 +4,7 @@ import styles from '../../sing_up/singUp.module.css'
 import infoStyle from './InfoUser.module.css'
 import React, {MutableRefObject, RefObject, useEffect, useRef, useState} from "react";
 import {useSelector} from 'react-redux'
-import {changeUserInfo, getUser, setIsEdit, setShowExitModal} from "../../../store/infoUserSlice";
+import {changeUserInfo, getUser, logout, setIsEdit, setShowExitModal} from "../../../store/infoUserSlice";
 import {RootState, useAppDispatch} from "../../../store";
 import {IUserDTO} from "../../../interfaces";
 import {useFormik} from "formik";
@@ -14,6 +14,7 @@ import backArrow from '../../../images/back.svg'
 import edit from '../../../images/edit.svg'
 import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
+import Button from "../../../components/Button";
 
 /*type Event = MouseEvent | TouchEvent;
 
@@ -48,9 +49,10 @@ const InfoUser = () => {
     const dataUser = useSelector<RootState, IUserDTO | undefined>(state => state.infoUser?.info)
     const dispatch = useAppDispatch()
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
-    const requestErrorMessage = useSelector<RootState, string>(state => state.infoUser.requestMessage as string)
-    let mode = isNoEdit ? 'Редактировать профиль' : 'Сохранить'
+    const navigate=useNavigate()
+    const requestMessage=useSelector<RootState,string>(state => state.infoUser.requestMessage as string)
     // const ref=useRef<HTMLDivElement>(null)
+
 
 
     const formik = useFormik({
@@ -78,23 +80,16 @@ const InfoUser = () => {
             }
         },
         onSubmit: (values) => {
-            if (mode === 'Сохранить') {
+
+            if (!isNoEdit|| requestMessage!=="Сохранено") {
                 dispatch(changeUserInfo(values))
             } else {
-                dispatch(setIsEdit(false))
+                dispatch(logout())
             }
         }
     })
 
-    const wrapperClick = (e: any) => {
-        console.log('11')
-        e.stopPropagation()
-         dispatch(setIsEdit(true))
-    }
-
-    const test = (event:any) => {
-        console.log('test')
-        event.preventDefault()
+    const inputClick = (event:React.MouseEvent<HTMLInputElement>) => {
         event.stopPropagation()
         dispatch(setIsEdit(false))
     }
@@ -108,19 +103,20 @@ const InfoUser = () => {
                 </div> :
                 <form className={inputStyle.form_body} onSubmit={formik.handleSubmit}>
                     <div className={styles.profile_header}>
-                        <img src={backArrow} alt={'back'}/>
+                        <img src={backArrow} alt={'back'} onClick={()=>navigate(-1)} />
                         <h3 className={styles.header_title}>Профиль</h3>
                         {/*  <button
                             type='submit' >
                             <img src={edit} style={{width:'20px'}} alt={'edit'}/>
                         </button>*/}
                     </div>
+                    <div style={{color:'green',marginBottom:'20px'}}>{requestMessage}</div>
+
                     <div className={inputStyle.form__item}>
                         <span className={inputStyle.title}>Имя</span>
                         <input
                             onClick={(e)=> {
-                               e.stopPropagation()
-                                return  test(e)
+                                return inputClick(e)
                             }}
                             className={`${inputStyle.input_data} `}
                                placeholder={dataUser?.name}
@@ -132,7 +128,9 @@ const InfoUser = () => {
                     <div className={inputStyle.form__item}>
                         <span className={inputStyle.title}>Фамилия</span>
                         <input
-                            onFocus={()=>dispatch(setIsEdit(false))}
+                            onClick={(e)=> {
+                                return inputClick(e)
+                            }}
                             className={`${inputStyle.input_data} `}
                                placeholder={dataUser?.lastName}
                                {...formik.getFieldProps('lastName')}
@@ -144,7 +142,9 @@ const InfoUser = () => {
                     <div className={`${inputStyle.form__item} ${infoStyle.form_body}`}>
                         <span className={inputStyle.title}>Ваш телефон</span>
                         <input
-                            onFocus={()=>dispatch(setIsEdit(false))}
+                            onClick={(e)=> {
+                                return inputClick(e)
+                            }}
                             className={`${inputStyle.input_data} `}
                                type={'tel'}
                                placeholder={dataUser?.phone}
@@ -156,7 +156,9 @@ const InfoUser = () => {
                     <div className={inputStyle.form__item}>
                         <span className={inputStyle.title}>Email</span>
                         <input
-                            onFocus={()=>dispatch(setIsEdit(false))}
+                            onClick={(e)=> {
+                                return inputClick(e)
+                            }}
                             className={`${inputStyle.input_data} `}
                                type={'text'}
                                placeholder={dataUser?.email}
@@ -165,8 +167,8 @@ const InfoUser = () => {
                         <hr color={'grey'} style={{width: '100%'}}/>
                     </div>
                     {formik.touched.email && formik.errors.email && <div className={styles.formik_errors}>{formik.errors.email}</div>}
-                    {requestErrorMessage && <div>{requestErrorMessage}</div>}
-                    <div>{isNoEdit?'Выход':'Сохранить'}</div>
+                    {/*<div>{isNoEdit?'Выход':'Сохранить'}</div>*/}
+                    <Button className={styles.logout_btn} type={"submit"} text={isNoEdit?'Выход':'Сохранить'}></Button>
                 </form>
             }
         </div>

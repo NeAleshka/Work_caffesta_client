@@ -21,7 +21,7 @@ const Header = ({themeStyle}:IHeaderThemeStyle) => {
             <header className={styles.header} style={themeStyle}>
                 <div className={styles.container}>
                     <div className={styles.logo}>
-                        {isLogin && <img src={user} alt="logo" onClick={()=>dispatch(setShowMenu(!showMenu))}/>}
+                        {isLogin && <img src={user} alt="logo" onClick={()=>dispatch(setShowMenu(true))}/>}
                         <div className={styles.logoTitle}>
                             {`${localStorage.getItem('organizationName') ?? 'Caffesta'}`}
                         </div>

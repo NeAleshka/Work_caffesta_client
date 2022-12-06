@@ -115,3 +115,14 @@ input::-webkit-calendar-picker-indicator {
     width: fit-content;
     font-size: 13px;
 }
+
+.logout_btn{
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    border: none;
+}
+.input_header{
+    display: flex;
+    justify-content: space-between
+}

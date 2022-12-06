@@ -79,7 +79,7 @@ const News = () => {
     return (
         <Carousel
             showStatus={false}
-            showThumbs={true}
+            showThumbs={false}
             showArrows={false}
             swipeable
             dynamicHeight={true}

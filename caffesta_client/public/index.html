@@ -15,14 +15,14 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
-<script defer>
-  if("serviceWorker" in navigator){
-    window.addEventListener('load',()=>{
-      navigator.serviceWorker
-              .register('%PUBLIC_URL%/sw.js')
-              .then(() => console.log('sw registered'))
-              .catch(()=>console.log('sw not registered'))
-    })
-  }
+<script>
+  // if("serviceWorker" in navigator){
+  //   window.addEventListener('load',()=>{
+  //     navigator.serviceWorker
+  //             .register('%PUBLIC_URL%/sw.js')
+  //             .then(() => console.log('sw registered'))
+  //             .catch(()=>console.log('sw not registered'))
+  //   })
+  // }
 </script>
 </html>

@@ -55,7 +55,6 @@ function App() {
 
     const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
         event.stopPropagation()
-        event.preventDefault()
         dispatch(setIsEdit(true))
         dispatch(setShowExitModal(false))
         if(!pathname.includes('info')){
