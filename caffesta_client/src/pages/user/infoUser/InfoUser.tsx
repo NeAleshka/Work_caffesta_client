@@ -16,42 +16,13 @@ import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 import Button from "../../../components/Button";
 
-/*type Event = MouseEvent | TouchEvent;
-
-const useOnClickOutside = <T extends HTMLElement = HTMLElement>(
-    ref: RefObject<T>,
-    handler: (event: Event) => void,
-) => {
-    useEffect(() => {
-        const listener = (event: Event) => {
-            const el = ref?.current;
-            if (!el || el.contains((event?.target as Node) || null)) {
-                return;
-            }
-
-            handler(event); // Call the handler only if the click is outside of the element passed.
-        };
-
-        document.addEventListener('mousedown', listener);
-        document.addEventListener('touchstart', listener);
-
-        return () => {
-            document.removeEventListener('mousedown', listener);
-            document.removeEventListener('touchstart', listener);
-        };
-    }, [ref, handler]); // Reload only if ref or handler changes
-};*/
-
-
-
 const InfoUser = () => {
-    let isNoEdit = useSelector<RootState, boolean>(state => state.infoUser.isEdit as boolean)
+    let isEdit = useSelector<RootState, boolean>(state => state.infoUser.isEdit as boolean)
     const dataUser = useSelector<RootState, IUserDTO | undefined>(state => state.infoUser?.info)
     const dispatch = useAppDispatch()
     const isLoading = useSelector<RootState, boolean>(state => state.infoUser.isLoading as boolean)
     const navigate=useNavigate()
     const requestMessage=useSelector<RootState,string>(state => state.infoUser.requestMessage as string)
-    // const ref=useRef<HTMLDivElement>(null)
 
 
 
@@ -80,8 +51,7 @@ const InfoUser = () => {
             }
         },
         onSubmit: (values) => {
-
-            if (!isNoEdit|| requestMessage!=="Сохранено") {
+            if (isEdit) {
                 dispatch(changeUserInfo(values))
             } else {
                 dispatch(logout())
@@ -91,13 +61,11 @@ const InfoUser = () => {
 
     const inputClick = (event:React.MouseEvent<HTMLInputElement>) => {
         event.stopPropagation()
-        dispatch(setIsEdit(false))
+        dispatch(setIsEdit(true))
     }
 
-    // useOnClickOutside(ref, (e) => wrapperClick(e))
-//ref={ref}
     return (
-        <div className={container.container}>
+        <div className={container.container} onClick={(event)=>event.stopPropagation()}>
             {isLoading ? <div>
                     <BounceLoader color={'blue'}/>
                 </div> :
@@ -168,7 +136,7 @@ const InfoUser = () => {
                     </div>
                     {formik.touched.email && formik.errors.email && <div className={styles.formik_errors}>{formik.errors.email}</div>}
                     {/*<div>{isNoEdit?'Выход':'Сохранить'}</div>*/}
-                    <Button className={styles.logout_btn} type={"submit"} text={isNoEdit?'Выход':'Сохранить'}></Button>
+                    <Button className={styles.logout_btn} type={"submit"} text={isEdit?'Сохранить':'Выход'}></Button>
                 </form>
             }
         </div>

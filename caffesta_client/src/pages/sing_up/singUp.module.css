@@ -1,9 +1,10 @@
 .description {
-    font-size: 20px;
+    font-size: 12px;
     line-height: 25px;
-    margin-top: 34px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 5px;
     font-weight: 400;
+    text-align: start;
 }
 
 
@@ -18,23 +19,21 @@
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
-    align-items: center;
+    align-items: flex-start;
+
 }
 
 .form__item {
-    position: relative;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    flex-direction: column;
     -webkit-box-pack: center;
-    justify-content: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
-    width: 100%;
-    margin-bottom: 18px;
+    width: 90%;
     font-weight: 400;
-
+    align-items: center;
+    justify-content: start;
 }
 
 input::-webkit-calendar-picker-indicator {
@@ -43,18 +42,18 @@ input::-webkit-calendar-picker-indicator {
 
 
 .input_data {
-    position: relative;
     border: 1px solid rgba(0, 0, 0, .35);
     border-radius: 5px;
     font-size: 1.5rem;
     line-height: 20px;
     font-weight: 500;
     transition: .5s;
-    max-width: 305px;
+    max-width: 220px;
     padding: 2px 0;
     color: white;
     background-color: black;
     outline: none;
+    margin-left: 10px;
 }
 
 .input_icons {
@@ -73,7 +72,7 @@ input::-webkit-calendar-picker-indicator {
     font-size: 22px;
     line-height: 27px;
     cursor: pointer;
-    background: #3cad50;
+    background: orange;
     color: #fff;
     border: 0;
     width: 100%;
@@ -106,23 +105,42 @@ input::-webkit-calendar-picker-indicator {
     width: 100%;
 }
 
-.header_title{
+.header_title {
     margin: 0 auto;
     font-weight: 400;
 }
 
-.title{
+.title {
     width: fit-content;
     font-size: 13px;
 }
 
-.logout_btn{
+.logout_btn {
     background-color: black;
     color: white;
     font-size: 20px;
     border: none;
 }
-.input_header{
+
+.input_header {
     display: flex;
     justify-content: space-between
+}
+
+.country {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+.country:focus-visible {
+    outline: none;
+}
+
+.phone_prefix{
+    font-size: 1.5rem;
+}
+
+.change_country{
+    display: flex;
 }

@@ -23,16 +23,17 @@ import User from './pages/user/User'
 import favicon from '../src/favicon.ico'
 import {darkTheme, defaultTheme, ITheme, lightTheme} from "./themes";
 import Menu from "./components/Menu/Menu";
+import ConfirmPhone from "./pages/confirmPhone/ConfirmPhone";
 
 
 function App() {
     const dispatch = useAppDispatch()
     let [cookies] = useCookies()
-    const {pathname}=useLocation()
+    const {pathname} = useLocation()
     const organizationInfo = useSelector<RootState, IOrganizationInfo>(state => state.infoUser.info?.organizationInfo as IOrganizationInfo)
     const [networkStatus, setNetworkStatus] = useState<boolean>(true)
     let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)
-    const themeProperties=useSelector<RootState,ITheme| null>(state => state.infoUser.currentTheme)
+    const themeProperties = useSelector<RootState, ITheme | null>(state => state.infoUser.currentTheme)
 
     window.addEventListener('online', () => {
         setNetworkStatus(true)
@@ -53,18 +54,18 @@ function App() {
         }
     }, [networkStatus])
 
-    const hideProfileSettings= (event: React.MouseEvent<HTMLDivElement>)=>{
+    const hideProfileSettings = (event: React.MouseEvent<HTMLDivElement>) => {
         event.stopPropagation()
-        dispatch(setIsEdit(true))
+        dispatch(setIsEdit(false))
         dispatch(setShowExitModal(false))
-        if(!pathname.includes('info')){
+        if (!pathname.includes('info')) {
             dispatch(setShowProfileSettings(false))
         }
     }
 
-    useEffect(()=>{
-        if(localStorage.getItem('current_theme_type')){
-            themeType= +JSON.parse(localStorage.getItem('current_theme_type') as string)
+    useEffect(() => {
+        if (localStorage.getItem('current_theme_type')) {
+            themeType = +JSON.parse(localStorage.getItem('current_theme_type') as string)
         }
         switch (themeType) {
             case 1: {
@@ -82,7 +83,7 @@ function App() {
             default:
                 dispatch(setCurrentTheme(defaultTheme))
         }
-    },[themeType])
+    }, [themeType])
 
 
     return (
@@ -91,8 +92,10 @@ function App() {
                 <title>{localStorage.getItem('organizationName') ?? 'Caffesta'}</title>
                 <link rel="icon" href={`${organizationInfo?.logo ?? favicon}`}/>
             </Helmet>
-            <div className="App" onClick={(event)=>{hideProfileSettings(event)}} style={themeProperties?.layout}>
-                 <Header themeStyle={themeProperties?.header??{} }/>
+            <div className="App" onClick={(event) => {
+                hideProfileSettings(event)
+            }} style={themeProperties?.layout}>
+                {pathname.includes('user')&& <Header themeStyle={themeProperties?.header ?? {}}/> }
                 <Menu/>
                 <Routes>
                     <Route path={'/'} element={
@@ -114,6 +117,9 @@ function App() {
                         <User/>
                     }>
                     </Route>
+                    <Route path={'/confirm_phone'} element={
+                        <ConfirmPhone/>
+                    }/>
                 </Routes>
             </div>
         </CookiesProvider>

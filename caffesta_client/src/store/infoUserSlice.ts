@@ -272,7 +272,7 @@ interface IInitial {
 }
 
 const initialState: IInitial = {
-    isEdit: true,
+    isEdit: false,
     isLogin: false,
     isVerification: false,
     isSuccessRequest: false,
@@ -409,7 +409,8 @@ const infoUserSlice = createSlice({
                 localStorage.removeItem('refreshToken')
             })
             .addCase(changeUserInfo.fulfilled, (state, action) => {
-                state.isEdit = true
+                debugger
+                state.isEdit = false
                 if (action.payload.success) {
                     state.info = action.payload.userData
                     state.requestMessage="Сохранено"
@@ -422,6 +423,7 @@ const infoUserSlice = createSlice({
                 state.requestMessage = action.payload?.error?.message || 'Something error'
             })
             .addCase(setIsEdit, (state, action) => {
+                debugger
                 state.isEdit = action.payload.isEdit
             })
             .addCase(setPrompt, (state, action) => {
