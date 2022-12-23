@@ -7,7 +7,7 @@
 .header {
     width: 100%;
     height: 83px;
-    background-color: black;
+    background-color: #3b3838;
 }
 
 .container {
@@ -24,7 +24,9 @@
     align-items: center;
     max-height: 100%;
 }
-
+.container::-webkit-scrollbar{
+    display: none;
+}
 .logo {
     display: flex;
     width: 100%;

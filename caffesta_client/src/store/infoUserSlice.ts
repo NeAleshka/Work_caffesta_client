@@ -9,6 +9,8 @@ import {
 import {ITheme} from "../themes";
 
 
+//@Todo:декомпозировать слайс, регистрацию и экшены по закрытию модалок вынести в другие слайсы, а смену темы вообще возможно нужно будет удалить
+
 export const registrationUser = createAsyncThunk<ILoginResponse, IUserInfo, {
     rejectValue: { error: IErrorRequest }
 }>(
@@ -231,12 +233,21 @@ export const setShowMenu = createAction('infoUser/setShowMenu',
         }
     })
 
+export const setShowCode = createAction('infoUser/setShowCode',
+    (setShowCode:boolean) => {
+        return {
+            payload: {
+                setShowCode
+            }
+        }
+    })
 
 const initial: IUserDTO = {
     phone: '',
     email: '',
     name: '',
     lastName: '',
+    birthday:'',
     bonuses: {
         bonus: 0,
         points: 0,
@@ -268,7 +279,8 @@ interface IInitial {
     news:INews[] | null
     detailsNewsIndex:number
     showExitModal:boolean
-    showMenu:boolean
+    showMenu:boolean,
+    showCode:boolean,
 }
 
 const initialState: IInitial = {
@@ -289,6 +301,7 @@ const initialState: IInitial = {
     detailsNewsIndex:0,
     showExitModal:false,
     showMenu:false,
+    showCode:false,
 }
 
 const infoUserSlice = createSlice({
@@ -423,7 +436,6 @@ const infoUserSlice = createSlice({
                 state.requestMessage = action.payload?.error?.message || 'Something error'
             })
             .addCase(setIsEdit, (state, action) => {
-                debugger
                 state.isEdit = action.payload.isEdit
             })
             .addCase(setPrompt, (state, action) => {
@@ -463,6 +475,9 @@ const infoUserSlice = createSlice({
             })
             .addCase(setShowMenu,(state, action)=>{
                 state.showMenu=action.payload.setShowMenu
+            })
+            .addCase(setShowCode,(state, action)=>{
+                state.showCode=action.payload.setShowCode
             })
     }
 })

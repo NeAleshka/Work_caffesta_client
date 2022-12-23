@@ -5,11 +5,11 @@ import {RootState, useAppDispatch} from "../../../store";
 import {useBarcode} from 'next-barcode';
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
-import {useEffect, useLayoutEffect, useState} from "react";
-import {getNews, setDetailsNewsIndex, setIsLoading} from "../../../store/infoUserSlice";
+import {useEffect, useLayoutEffect, useRef} from "react";
+import {getNews, setDetailsNewsIndex, setIsLoading, setShowCode} from "../../../store/infoUserSlice";
 import {INews} from "../../../interfaces";
 import {useNavigate} from "react-router-dom";
-import Footer from "../../../components/Footer/Footer";
+import UserCode from "../../../components/UserCode/UserCode";
 
 interface NewsItemProps {
     title: string
@@ -30,14 +30,17 @@ const QRCode = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const news = useSelector<RootState, INews[] | null>(state => state.infoUser.news)
+    const showCode = useSelector<RootState, boolean>(state => state.infoUser.showCode)
+    const refMain = useRef<HTMLDivElement>(null)
 
-    const {inputRef} = useBarcode({
-        value: `${infoForCode}`,
-        options: {
-            background: '#efefef',
-            width: 3.1,
-            displayValue: false,
-            height: 250
+
+    useEffect(()=>{
+        if (!showCode) {
+           setTimeout(() => {
+               refMain.current?.scrollTo(0, 250)
+           },0)
+        } else {
+            refMain.current?.scrollTo({top: 0, behavior: 'smooth'})
         }
     })
 
@@ -50,16 +53,11 @@ const QRCode = () => {
             dispatch(getNews())
         }
     }, [])
-
     return (
-        <div className={container.container}>
+        <div style={{overflow: 'scroll'}} ref={refMain} id={'user_page'} className={container.container}>
             <section className={style.wrapper}>
-                <div className={style.qr_content}>
-                    <div className={style.qrWrapper}>
-                        <svg ref={inputRef}/>
-                    </div>
-                </div>
-                <News/>
+                <UserCode/>
+                <MainNews/>
                 <div className={style.list}>
                     <div className={style.list_item} onClick={() => navigate('/user/promotions')}>АКЦИИ</div>
                     <hr color={'grey'} style={{width: '100%'}}/>
@@ -67,12 +65,19 @@ const QRCode = () => {
                     <hr color={'grey'} style={{width: '100%'}}/>
                     <div className={style.list_item} onClick={() => navigate('/user/wallet')}>КОШЕЛЁК</div>
                 </div>
+                <News/>
             </section>
         </div>
     )
 }
 
 export default QRCodePage
+
+export const MainNews = () => {
+    return (
+        <NewsItem title={'Главная новость'} index={0}/>
+    )
+}
 
 const News = () => {
     const news = useSelector<RootState, INews[]>(state => state.infoUser.news as [])
@@ -106,8 +111,7 @@ const News = () => {
     )
 }
 
-
-const NewsItem = ({title, index}: NewsItemProps) => {
+export const NewsItem = ({title, index}: NewsItemProps) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const goToNews = () => {
@@ -118,7 +122,7 @@ const NewsItem = ({title, index}: NewsItemProps) => {
     return (
         <div onClick={goToNews}
              className={style.item_news}>
-            <div>{title}</div>
+            <div className={style.item_news_title}>{title}</div>
         </div>
     )
 }

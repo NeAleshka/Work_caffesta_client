@@ -2,8 +2,9 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: black;
+    background-color: #3b3838;
     height: 60px;
+    display: flex;
 }
 
 .icon {
@@ -49,11 +50,19 @@
 }
 .wallet_wrapper{
     display: flex;
+    background-color: black;
+    width: 60%;
+    justify-content: space-evenly
 }
 
 .wallet_info{
-    margin-left: 10px;
+    margin-left: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center
+}
+
+.wallet_img{
+    width: 20px;
 }

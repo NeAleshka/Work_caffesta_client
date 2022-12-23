@@ -13,10 +13,10 @@
   line-height: 25px;
   font-weight: 200;
   text-align: center;
-  position: relative;
-  background-color: black;
+  position: absolute;
+  min-width: 100vw;
+  background-color: #3b3838;
   color: white;
   min-height: 100vh;
   box-sizing: border-box;
 }
-

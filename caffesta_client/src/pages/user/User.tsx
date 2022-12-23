@@ -2,7 +2,7 @@ import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../store";
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import InfoUser from "./infoUser/InfoUser";
 import Accumulation from "./accumulation/accumulation";
 import QRCode from "./qrCode/QRCode";
@@ -28,9 +28,10 @@ const User = () => {
     const showExitModal = useSelector<RootState, boolean>(state => state.infoUser.showExitModal)
     let [cookies] = useCookies()
     let promptEvent = useSelector<RootState, Event | undefined>(state => state.infoUser.prompt)
-    const path=useLocation().pathname
-
-
+    const path = useLocation().pathname
+    let backGround=''
+    const ref=useRef<HTMLDivElement>(null)
+    const showCode = useSelector<RootState, boolean>(state => state.infoUser.showCode)
     useEffect(() => {
         if (isOnline && !isLogin && isInitialized) {
             navigate('/')
@@ -53,11 +54,23 @@ const User = () => {
         }, 1000)
     }, [])
 
+    if(path.includes('wallet')){
+        backGround='#c28f33'
+    }
+
+    useEffect(()=>{
+        if(!showCode){
+            path.includes('wallet') && ref.current?.scrollTo({top:230})
+        }else {
+            ref.current?.scrollTo({top:0,behavior:'smooth'})
+        }
+    })
+
     return (
         isLoading ? <PreLoader loading={isLoading}/> :
             isLogin && isInitialized ?
-                <div>
-                    <div id={'user_page'} className={style.user_wrapper} style={{maxHeight: '80vh', overflow: 'auto'}}>
+                <div className={style.wrapper} ref={ref} style={{backgroundColor:`${backGround}`}}>
+                    <div className={style.user_wrapper}>
                         {isLoading ? <PreLoader loading={isLoading}/> :
                             <Routes>
                                 <Route path={'info'} element={<InfoUser/>}/>
@@ -70,7 +83,7 @@ const User = () => {
                                 <Route path={'balls_menu'} element={<BallsMenu/>}/>
                             </Routes>}
                     </div>
-                    {path.includes('user/qr_code') && <Footer/> }
+                    {path.includes('user') && <Footer/>}
                 </div>
                 : <div></div>)
 }

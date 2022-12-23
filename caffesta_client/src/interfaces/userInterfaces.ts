@@ -14,14 +14,15 @@ export interface ILoginResponse {
 }
 
 export interface IUserDTO {
-    name?: string,
-    lastName?: string
-    email?: string
-    phone?: string
+    name: string,
+    lastName: string
+    email: string
+    phone: string
     bonuses?:IBonuses
     cardNumber?:string
-    id?:string
+    id:string
     organizationInfo?:IOrganizationInfo
+    birthday:string
 }
 
 export interface IUserInfo {

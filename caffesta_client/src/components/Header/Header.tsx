@@ -2,7 +2,7 @@ import styles from "./LayOut.module.css";
 import {useSelector} from "react-redux";
 import {RootState, useAppDispatch} from "../../store";
 import React, {CSSProperties} from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import user from '../../images/profile.svg'
 import feed from '../../images/notification.svg'
 import {setShowMenu} from "../../store/infoUserSlice";
@@ -15,6 +15,7 @@ const Header = ({themeStyle}:IHeaderThemeStyle) => {
     const isLogin = useSelector<RootState, boolean>(state => state.infoUser.isLogin as boolean)
     const dispatch=useAppDispatch()
     const showMenu=useSelector<RootState,boolean>(state => state.infoUser.showMenu)
+    const pathname=useLocation().pathname
 
     return (
         <div className={styles.flexCol}>

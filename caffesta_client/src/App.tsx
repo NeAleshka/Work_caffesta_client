@@ -32,8 +32,8 @@ function App() {
     const {pathname} = useLocation()
     const organizationInfo = useSelector<RootState, IOrganizationInfo>(state => state.infoUser.info?.organizationInfo as IOrganizationInfo)
     const [networkStatus, setNetworkStatus] = useState<boolean>(true)
-    let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)
-    const themeProperties = useSelector<RootState, ITheme | null>(state => state.infoUser.currentTheme)
+   /* let themeType = useSelector<RootState, number>(state => state.infoUser.themeType)
+    const themeProperties = useSelector<RootState, ITheme | null>(state => state.infoUser.currentTheme)*/
 
     window.addEventListener('online', () => {
         setNetworkStatus(true)
@@ -63,7 +63,9 @@ function App() {
         }
     }
 
-    useEffect(() => {
+
+
+    /*useEffect(() => {
         if (localStorage.getItem('current_theme_type')) {
             themeType = +JSON.parse(localStorage.getItem('current_theme_type') as string)
         }
@@ -83,7 +85,7 @@ function App() {
             default:
                 dispatch(setCurrentTheme(defaultTheme))
         }
-    }, [themeType])
+    }, [themeType])*/
 
 
     return (
@@ -94,8 +96,8 @@ function App() {
             </Helmet>
             <div className="App" onClick={(event) => {
                 hideProfileSettings(event)
-            }} style={themeProperties?.layout}>
-                {pathname.includes('user')&& <Header themeStyle={themeProperties?.header ?? {}}/> }
+            }} >
+                {pathname.includes('user')&& <Header themeStyle={pathname.includes('wallet')?{backgroundColor:'#c28f33'}:{}}/> }
                 <Menu/>
                 <Routes>
                     <Route path={'/'} element={

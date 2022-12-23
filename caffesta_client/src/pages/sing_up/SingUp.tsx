@@ -112,7 +112,7 @@ const SingUp = () => {
                             <div className={styles.description}>Введите Ваши данные<br/>для регистрации</div>
                             <div className="form">
                                 <form className={styles.form_body} onSubmit={formik.handleSubmit}>
-                                    <div className={styles.form__item}>
+                                    <div className={`${styles.form__item} ${styles.sing_up_item}`}>
                                         <input className={styles.input_data} type="text"
                                                placeholder="Логин"
                                                {...formik.getFieldProps('login')}

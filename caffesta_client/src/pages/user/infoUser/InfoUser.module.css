@@ -34,3 +34,24 @@
 .save_change{
     background-color: green;
 }
+
+.button_wrapper{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.birthday_wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+}
+
+.birthday_wrapper input{
+    width: 35px;
+}
+
+.birthday_wrapper div:last-child{
+    width: 70px;
+}

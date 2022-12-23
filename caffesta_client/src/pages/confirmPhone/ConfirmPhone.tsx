@@ -77,24 +77,13 @@ const ConfirmPhone = () => {
                                 <hr color={'grey'} style={{width: '100%'}}/>
                                 {formik.touched.code && formik.errors.code &&
                                     <div className={styles.formik_errors}>{formik.errors.code}</div>}
-                                {/*<div className={styles.form__item}>
-                                        <input className={styles.input_data} type="password"
-                                               placeholder="Пароль"
-                                               {...formik.getFieldProps('password')}
-                                        />
-                                        <div className={styles.input_icons}>
-                                            <img src={user} alt={'pass'}/>
-                                        </div>
-                                        {formik.touched.password && formik.errors.phone &&
-                                            <div className={styles.formik_errors}>{formik.errors.password}</div>}
-                                    </div>*/}
                                 <div className={styles.description} style={{marginTop: '10px', color: 'gray'}}>
                                     Сейчас вам поступит автоматический звонок или SMS с кодом на номер <span
                                     style={{fontWeight: '700', color: 'white'}}>{location?.phone}</span>
                                 </div>
 
                                 {
-                                    isLoading ? <PreLoader size={20} color={'orange'} cssOverride={{marginTop:'0'}} loading={isLoading}/> :
+                                    isLoading ? <PreLoader size={40} color={'orange'} cssOverride={{margin:'30px auto 0'}} loading={isLoading}/> :
                                         <button
                                         className={`${styles.submitButton} ${pageStyle.repeat_sms}`
                                         } onClick={() => navigate('/confirm_phone')}
