@@ -4,7 +4,8 @@ import {IUserInfo, ILoginResponse, IUserDTO, IErrorRequest, IServerResponse, INe
 
 const instants=axios.create({
     baseURL: 'http://localhost:5000/',
-    withCredentials: true,
+    //withCredentials: true,
+
     headers:{
         'Access-Control-Allow-Private-Network':true,
         'Access-Control-Allow-Origin':true,
