@@ -6,7 +6,8 @@ const instants=axios.create({
     baseURL: 'http://localhost:5000/',
     withCredentials: true,
     headers:{
-        'Access-Control-Allow-Private-Network':true
+        'Access-Control-Allow-Private-Network':true,
+        'Access-Control-Allow-Origin':true,
    }
 })
 
