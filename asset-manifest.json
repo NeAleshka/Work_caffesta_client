@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/bundles/appclient/static/css/main.css",
+    "main.js": "/bundles/appclient/static/js/main.js",
+    "workbox-0f1a0519.js.map": "/workbox-0f1a0519.js.map",
+    "bundles/appclient/static/media/Geometria.woff": "/bundles/appclient/static/media/Geometria.woff",
+    "bundles/appclient/static/media/Geometria-Medium.woff": "/bundles/appclient/static/media/Geometria-Medium.woff",
+    "bundles/appclient/static/media/Geometria-Bold.woff": "/bundles/appclient/static/media/Geometria-Bold.woff",
+    "workbox-0f1a0519.js": "/workbox-0f1a0519.js",
+    "bundles/appclient/static/media/favicon.ico": "/bundles/appclient/static/media/favicon.ico",
+    "sw.js.map": "/sw.js.map",
+    "sw.js": "/sw.js",
+    "bundles/appclient/static/media/Phone.svg": "/bundles/appclient/static/media/Phone.svg",
+    "bundles/appclient/static/media/Calendar.svg": "/bundles/appclient/static/media/Calendar.svg",
+    "bundles/appclient/static/media/wallet.svg": "/bundles/appclient/static/media/wallet.svg",
+    "index.html": "/index.html",
+    "bundles/appclient/static/media/profile.svg": "/bundles/appclient/static/media/profile.svg",
+    "bundles/appclient/static/media/notification.svg": "/bundles/appclient/static/media/notification.svg",
+    "bundles/appclient/static/media/home.svg": "/bundles/appclient/static/media/home.svg",
+    "bundles/appclient/static/media/user.svg": "/bundles/appclient/static/media/user.svg",
+    "bundles/appclient/static/media/home_white.svg": "/bundles/appclient/static/media/home_white.svg",
+    "bundles/appclient/static/media/email.svg": "/bundles/appclient/static/media/email.svg",
+    "bundles/appclient/static/media/back.svg": "/bundles/appclient/static/media/back.svg",
+    "main.css.map": "/bundles/appclient/static/css/main.css.map",
+    "main.js.map": "/bundles/appclient/static/js/main.js.map"
+  },
+  "entrypoints": [
+    "bundles/appclient/static/css/main.css",
+    "bundles/appclient/static/js/main.js"
+  ]
+}
