@@ -6,7 +6,3 @@
     height:calc(100vh - 60px - 83px);
     overflow: scroll;
 }
-
-.wrapper::-webkit-scrollbar{
-    display: none;
-}

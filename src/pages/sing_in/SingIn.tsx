@@ -51,11 +51,13 @@ const SingIn = () => {
         dispatch(setIsLoading(false))
     }, [])
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (isVerification) {
             navigate('/user/qr_code', {state: formik.values.phone})
         }
-    }, [isVerification])
+    }, [isVerification])*/
+
+    navigate('/user/qr_code', {state: formik.values.phone})
 
     const changeCountry = (event: ChangeEvent<HTMLSelectElement>) => {
         switch (event.currentTarget.value) {

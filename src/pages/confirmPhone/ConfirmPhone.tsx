@@ -52,12 +52,12 @@ const ConfirmPhone = () => {
         }
     }, [formik.values.code.length])
 
-    useEffect(() => {
+   /* useEffect(() => {
         if (isVerification) {
             navigate('/user/qr_code')
         }
-    }, [isVerification])
-
+    }, [isVerification])*/
+    navigate('/user/qr_code')
     return (
         <div className={`${mainStyles.wrapper} ${mainStyles.flexCol}`}>
             <main>

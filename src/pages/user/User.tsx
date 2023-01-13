@@ -32,18 +32,18 @@ const User = () => {
     let backGround=''
     const ref=useRef<HTMLDivElement>(null)
     const showCode = useSelector<RootState, boolean>(state => state.infoUser.showCode)
-    useEffect(() => {
+ /*   useEffect(() => {
         if (isOnline && !isLogin && isInitialized) {
             navigate('/')
         }
-    }, [isInitialized, isLogin])
+    }, [isInitialized, isLogin])*/
 
-    useEffect(() => {
+   /* useEffect(() => {
         if (!isOnline) {
             isLogin = true
             isInitialized = true
         }
-    }, [isOnline])
+    }, [isOnline])*/
 
     useEffect(() => {
         dispatch(authMe(cookies.accessToken))
@@ -67,8 +67,8 @@ const User = () => {
     })
 
     return (
-        isLoading ? <PreLoader loading={isLoading}/> :
-            isLogin && isInitialized ?
+        /*isLoading ? <PreLoader loading={isLoading}/> :
+            isLogin && isInitialized ?*/
                 <div className={style.wrapper} ref={ref} style={{backgroundColor:`${backGround}`}}>
                     <div className={style.user_wrapper}>
                         {isLoading ? <PreLoader loading={isLoading}/> :
@@ -85,7 +85,7 @@ const User = () => {
                     </div>
                     {path.includes('user') && <Footer/>}
                 </div>
-                : <div></div>)
+                /*: <div></div>*/)
 }
 
 export default User

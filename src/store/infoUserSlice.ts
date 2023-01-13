@@ -243,21 +243,21 @@ export const setShowCode = createAction('infoUser/setShowCode',
     })
 
 const initial: IUserDTO = {
-    phone: '',
-    email: '',
-    name: '',
-    lastName: '',
-    birthday:'',
+    phone: '123423423',
+    email: '234234234234',
+    name: 'Лёша',
+    lastName: 'Будай',
+    birthday:'29.05.1999',
     bonuses: {
-        bonus: 0,
-        points: 0,
-        check: 0,
-        sum: 0
+        bonus: 1,
+        points: 2,
+        check: 3,
+        sum: 4
     },
-    cardNumber: "0",
+    cardNumber: "123456789012",
     id: '',
     organizationInfo: {
-        name: '',
+        name: '123456789012',
         logo: ''
     }
 }
@@ -400,13 +400,13 @@ const infoUserSlice = createSlice({
                     localStorage.setItem('refreshToken', action.payload.userData.refreshToken)
                     state.isInitialized=true
                 } else {
-                    state.isLogin = false
+                    state.isLogin = true
                     state.requestMessage = action.payload.error?.message || 'Error'
                 }
             })
             .addCase(login.rejected, (state, action) => {
-                state.isLogin = false
-                state.requestMessage = action.payload?.message || "Sorry,we have some problem(( "
+                state.isLogin = true
+                // state.requestMessage = action.payload?.message || "Sorry,we have some problem(( "
             })
             .addCase(logout.pending, (state) => {
                 state.isLoading = true
